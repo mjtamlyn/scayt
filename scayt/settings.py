@@ -9,6 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 DEBUG = not os.environ.get('PRODUCTION')
 SECRET_KEY = os.environ.get('SECRET_KEY', 'this-secret-is-bad')
 ALLOWED_HOSTS = [
+    'localhost',
     'scayt.mjtamlyn.co.uk',
 ]
 
@@ -27,6 +28,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -89,7 +91,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = "static/"
 STATICFILES_DIRS = [
-    'node_modules/cirrus-ui/dist/',
+    BASE_DIR / 'node_modules/cirrus-ui/dist/',
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
