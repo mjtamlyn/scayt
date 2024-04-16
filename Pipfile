@@ -11,6 +11,7 @@ wtforms = "*"
 django = "*"
 django-database-url = "*"
 psycopg2 = "*"
+gunicorn = "*"
 
 [dev-packages]
 
