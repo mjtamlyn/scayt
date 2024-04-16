@@ -92,3 +92,4 @@ STATICFILES_DIRS = [
     'node_modules/cirrus-ui/dist/',
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
