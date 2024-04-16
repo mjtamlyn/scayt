@@ -22,31 +22,27 @@
         <div class="row">
             <div class="col-6">
                 <h3>Upcoming events</h3>
-                <dl>
-                    <dt>Andover Archers Saxons Shoot</dt>
-                    <dd>
-                        <strong>21st April</strong>
-                        York/Hereford/Bristol rounds
-                    </dd>
-                    <dt>Tonbridge 46th Birthday shoot</dt>
-                    <dd>
-                        <strong>21st April</strong>
-                        St George/Albion/Windsor rounds
-                    </dd>
-                    <dt>Wallingford Junior Matchplay</dt>
-                    <dd>
-                        <strong>4th May</strong>
-                        720 rounds with H2H
-                    </dd>
-                </dl>
+                {% if upcoming_events %}
+                    <dl>
+                    {% for event in upcoming_events %}
+                        <dt>{{ event }}</dt>
+                        <dd>
+                            <strong>{{ event.date|date:"jS F Y" }}</strong>
+                            {{ event.get_round_family_display }}
+                        </dd>
+                    {% endfor %}
+                    </dl>
+                {% else %}
+                    <p>No upcoming events right now.</p>
+                {% endif %}
                 <p>
-                    <a class="u u-LR" href="#">View full calendar ></a>
+                    <a class="u u-LR" href="{% url 'calendar' %}">View full calendar ></a>
                 </p>
             </div>
 
             <div class="col-6">
                 <h3>{{ season }} standings</h3>
-                <p>Standings will be published shortly after the first events</p>
+                <p>Standings will be published shortly after the first events.</p>
                 <p>
                     <a class="u u-LR" href="#">View full standings ></a>
                 </p>

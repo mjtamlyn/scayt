@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="m-4">
+    <h3>{{ season.year }} Calendar</h3>
+
+    <div class="table-container">
+        <table class="table striped">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Date</th>
+                    <th>Event</th>
+                    <th>Postcode</th>
+                    <th>Rounds</th>
+                    <th>Age Groups</th>
+                </tr>
+            </thead>
+            {% for event in events %}
+                <tr>
+                    <td class="u-text-left">{{ forloop.counter }}</td>
+                    <td class="u-text-left">{{ event.date }}</td>
+                    <td class="u-text-left"><a class="u u-LR" href="{{ event.entry_link }}">{{ event.name }}</a></td>
+                    <td class="u-text-left"><a class="u u-LR" href="https://www.google.com/maps/place/{{ event.venue.post_code }}/">{{ event.venue.post_code }}</a></td>
+                    <td class="u-text-left">{{ event.get_round_family_display }}</td>
+                    <td class="u-text-left">
+                        {% for age in event.age_groups %}
+                        <span class="tag tag--xs bg-green-500">{{ age }}</span>
+                        {% endfor %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% endblock %}

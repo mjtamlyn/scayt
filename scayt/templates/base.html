@@ -19,8 +19,8 @@
             </div>
             <div class="header-nav" id="header-menu" role="button">
                 <div class="nav-right">
-                    <div class="nav-item">
-                        <a href="#">{{ season.year }} Calendar</a>
+                    <div class="nav-item {% if page_name == 'calendar' %}active{% endif %}">
+                        <a href="{% url 'calendar' %}">{{ season.year }} Calendar</a>
                     </div>
                     <div class="nav-item">
                         <a href="#">Standings</a>
