@@ -1,0 +1,64 @@
+{% load static %}
+
+<!doctype html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="UTF-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge;"/>
+        <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+        <link href="{% static 'cirrus.min.css' %}" rel="stylesheet">
+    </head>
+    <body>
+        <div class="header header-fixed u-unselectable header-animated">
+            <div class="header-brand">
+                <div class="nav-item no-hover">
+                    <a href="{% url 'root' %}"><h6 class="title">Southern Counties Youth Tour</h6></a>
+                </div>
+            </div>
+            <div class="header-nav" id="header-menu" role="button">
+                <div class="nav-right">
+                    <div class="nav-item">
+                        <a href="#">{{ season.year }} Calendar</a>
+                    </div>
+                    <div class="nav-item">
+                        <a href="#">Standings</a>
+                    </div>
+                    <div class="nav-item {% if page_name == 'faqs' %}active{% endif %}">
+                        <a href="{% url 'faqs' %}">FAQs</a>
+                    </div>
+                    <div class="nav-item">
+                        <a href="https://scasarchery.org.uk/">SCAS Website</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-lg mx-auto">
+            <div class="space space--xl"></div>
+            {% block content %}
+            {% endblock %}
+        </div>
+
+        <footer class="footer p-5">
+            <h6 class="footer__title text-white uppercase">Southern Counties Youth Tour</h6>
+            <div class="content">
+                <div class="divider"></div>
+                <ul class="no-bullets">
+                    <a href="{% url 'root' %}">
+                        <li class="footer__list-item">Home</li>
+                    </a>
+                    <a href="https://github.com/mjtamlyn/scayt">
+                        <li class="footer__list-item">Site code on Github</li>
+                    </a>
+                    <a href="https://scasarchery.org.uk/">
+                        <li class="footer__list-item">Southern Counties Archery Society</li>
+                    </a>
+                    </ul>
+                </ul>
+            </div>
+        </footer>
+    </body>
+</html>
+

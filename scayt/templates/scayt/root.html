@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="space space-l"></div>
+    <div class="hero bg-green-500">
+        <div class="hero-body">
+            <div class="content">
+                <h2 class="title text-yellow-200">Southern Counties Youth Tour</h2>
+                <h5 class="subtitle text-gray-300">Junior Archery Competitions across the South East</h5></div>
+        </div>
+    </div>
+
+    <div class="m-4">
+        <div class="row">
+            <div class="col-12">
+                <h3>What is SCAYT?</h3>
+                <p>SCAYT aims to encourage junior archers to participate in the shoots being organised around the SCAS region, meet their fellow junior archers, and provides an accessible step toward competition.  SCAYT consists of more than 30 events taking place around the region over the outdoor archery season. The tour finale is the Southern Counties Junior Outdoor Championship in late September.</p>
+                <p>The number of events is to encourage access, with a spread of timings and shoot locations around the large SCAS region. There is no suggestion that archers should aim to attend all, most or even many of the events. Archers can attend as many or as few of the SCAYT events as they choose while still being part of the tour.</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <h3>Upcoming events</h3>
+                <dl>
+                    <dt>Andover Archers Saxons Shoot</dt>
+                    <dd>
+                        <strong>21st April</strong>
+                        York/Hereford/Bristol rounds
+                    </dd>
+                    <dt>Tonbridge 46th Birthday shoot</dt>
+                    <dd>
+                        <strong>21st April</strong>
+                        St George/Albion/Windsor rounds
+                    </dd>
+                    <dt>Wallingford Junior Matchplay</dt>
+                    <dd>
+                        <strong>4th May</strong>
+                        720 rounds with H2H
+                    </dd>
+                </dl>
+                <p>
+                    <a class="u u-LR" href="#">View full calendar ></a>
+                </p>
+            </div>
+
+            <div class="col-6">
+                <h3>{{ season }} standings</h3>
+                <p>Standings will be published shortly after the first events</p>
+                <p>
+                    <a class="u u-LR" href="#">View full standings ></a>
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
