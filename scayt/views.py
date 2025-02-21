@@ -33,8 +33,16 @@ class FAQs(Root):
     template_name = 'scayt/faqs.html'
 
     def get_context_data(self, **kwargs):
-        season = Season.objects.first()
         context = super().get_context_data(**kwargs)
         context['page_title'] = 'FAQs'
         context['page_name'] = 'faqs'
+        return context
+
+
+class Standings(Root):
+    template_name = 'scayt/standings.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['season'] = Season.objects.first()
         return context

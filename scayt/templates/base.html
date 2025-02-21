@@ -29,7 +29,7 @@
                         <a href="{% url 'calendar' %}">{{ season.year }} Calendar</a>
                     </div>
                     <div class="nav-item">
-                        <a href="#">Standings</a>
+                        <a href="{% url 'standings' %}">Standings</a>
                     </div>
                     <div class="nav-item {% if page_name == 'faqs' %}active{% endif %}">
                         <a href="{% url 'faqs' %}">FAQs</a>
