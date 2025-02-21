@@ -5,11 +5,11 @@ from django.db import models
 
 ROUND_FAMILIES = [
     ('bristol', 'York/Hereford/Bristols'),
-    ('metric', 'Metrics'),
+    ('metric', '1440s/Metrics'),
     ('720', '720s'),
-    ('720/H2H', '720/H2H'),
+    ('720/H2H', '720s/H2H'),
     ('windsor', 'St George/Albion/Windsors'),
-    ('windsor', 'Westerns'),
+    ('western', 'Westerns'),
 ]
 
 AGE_GROUPS = [
@@ -40,8 +40,15 @@ class Venue(models.Model):
     post_code = models.CharField(max_length=10)
     website = models.URLField(blank=True, null=True)
 
+    class Meta:
+        ordering = ['host_club_name']
+
     def __str__(self):
         return self.host_club_name
+
+
+def default_age_groups():
+    return ['U21', 'U18', 'U16', 'U15', 'U14', 'U12']
 
 
 class Event(models.Model):
@@ -53,8 +60,11 @@ class Event(models.Model):
     age_groups = ArrayField(
         models.CharField(max_length=3, choices=AGE_GROUPS),
         size=6,
-        default=['U21', 'U18', 'U16', 'U15', 'U14', 'U12'],
-        help_text='Entry a comma separated list of age groups - U21,U18,U16,U15,U14,U12',
+        default=default_age_groups,
+        help_text='''
+            Entry a comma separated list of age groups -
+            U21,U18,U16,U15,U14,U12
+        ''',
     )
     entry_link = models.URLField(blank=True, null=True)
     # TODO show_results
