@@ -8,6 +8,7 @@ ROUND_FAMILIES = [
     ('metric', '1440s/Metrics'),
     ('720', '720s'),
     ('720/H2H', '720s/H2H'),
+    ('900', '900s'),
     ('s-metric', 'Short Metrics'),
     ('windsor', 'St George/Albion/Windsors'),
     ('western', 'Westerns'),
