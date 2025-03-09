@@ -11,6 +11,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'this-secret-is-bad')
 ALLOWED_HOSTS = [
     'localhost',
     'scayt.mjtamlyn.co.uk',
+    'scayt.scasarchery.org.uk',
 ]
 
 
