@@ -4,6 +4,19 @@
 <div class="m-4">
     <h3>{{ season.year }} Calendar</h3>
 
+    <p>
+        The current list of shoots which are part of the SCAYT Tour
+        {{ season.year }} are shown below. Additional events will be added in
+        due course once dates and entry information is confirfmed – a list of
+        provisional events can be found at the bottom of the page.
+    </p>
+    <p>
+        If you are running a competition with juniors in the region, we would love
+        to add your event to the tour. Please contact
+        <a class="u u-LR" href="mailto:scayt.organiser@scasarchery.org.uk">scayt.organiser@scasarchery.org.uk</a>
+        for more information.
+    </p>
+
     <div class="table-container">
         <table class="table striped">
             <thead>
@@ -32,5 +45,13 @@
             {% endfor %}
         </table>
     </div>
+
+    <h4>Provisional events</h4>
+    <ul>
+        <li><strong>Tonbridge Archers Birthday shoot</strong> – Typically held in May.</li>
+        <li><strong>Sittingbourne CC RS</strong> – Provisionally 14/06/25.</li>
+        <li><strong>RTAC Double 720</strong> – Provisionally 12/07/25</li>
+        <li><strong>Parkfield Archers Junior Goldmine</strong> – Typically held in September.</li>
+    </ul>
 </div>
 {% endblock %}
