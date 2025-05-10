@@ -22,4 +22,4 @@ def get_age_group(year_of_birth, year_of_event=None):
         return DbAges.AGE_UNDER_21
     elif birthday_this_year >= 50:
         return DbAges.AGE_50_PLUS
-    return 'Adult'
+    return "Adult"

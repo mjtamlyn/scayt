@@ -65,17 +65,14 @@ class RoundField(models.CharField):
 
 
 DbBowstyles = DbEnum(
-    'DbBowstyles', [
-        (item.name, item.value)
-        for item in AGB_bowstyles
-        if item in outdoor_bowstyles
-    ],
+    "DbBowstyles",
+    [(item.name, item.value) for item in AGB_bowstyles if item in outdoor_bowstyles],
 )
 DbBowstyles.__labels__ = {
-    DbBowstyles.RECURVE: 'Recurve',
-    DbBowstyles.COMPOUND: 'Compound',
-    DbBowstyles.BAREBOW: 'Barebow',
-    DbBowstyles.LONGBOW: 'Longbow',
+    DbBowstyles.RECURVE: "Recurve",
+    DbBowstyles.COMPOUND: "Compound",
+    DbBowstyles.BAREBOW: "Barebow",
+    DbBowstyles.LONGBOW: "Longbow",
 }
 
 
@@ -85,19 +82,18 @@ class BowstyleField(EnumField):
 
 
 DbAges = DbEnum(
-    'DbAges', [
-        (item.name, item.value) for item in AGB_ages
-    ],
+    "DbAges",
+    [(item.name, item.value) for item in AGB_ages],
 )
 DbAges.__labels__ = {
-    DbAges.AGE_50_PLUS: '50+',
-    DbAges.AGE_ADULT: 'Adult',
-    DbAges.AGE_UNDER_21: 'U21',
-    DbAges.AGE_UNDER_18: 'U18',
-    DbAges.AGE_UNDER_16: 'U16',
-    DbAges.AGE_UNDER_15: 'U15',
-    DbAges.AGE_UNDER_14: 'U14',
-    DbAges.AGE_UNDER_12: 'U12',
+    DbAges.AGE_50_PLUS: "50+",
+    DbAges.AGE_ADULT: "Adult",
+    DbAges.AGE_UNDER_21: "U21",
+    DbAges.AGE_UNDER_18: "U18",
+    DbAges.AGE_UNDER_16: "U16",
+    DbAges.AGE_UNDER_15: "U15",
+    DbAges.AGE_UNDER_14: "U14",
+    DbAges.AGE_UNDER_12: "U12",
 }
 
 
@@ -107,13 +103,12 @@ class AgeField(EnumField):
 
 
 DbGender = DbEnum(
-    'DbGender', [
-        (item.name, item.value) for item in AGB_genders
-    ],
+    "DbGender",
+    [(item.name, item.value) for item in AGB_genders],
 )
 DbGender.__labels__ = {
-    DbGender.MALE: 'Men',
-    DbGender.FEMALE: 'Women',
+    DbGender.MALE: "Men",
+    DbGender.FEMALE: "Women",
 }
 
 

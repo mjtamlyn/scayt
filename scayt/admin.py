@@ -5,8 +5,8 @@ from .models import Archer, ArcherSeason, Event, Result, Season, Venue
 
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
-    list_display = ['name', 'date', 'round_family']
-    list_filter = ['season']
+    list_display = ["name", "date", "round_family"]
+    list_filter = ["season"]
 
 
 admin.site.register(Archer)
