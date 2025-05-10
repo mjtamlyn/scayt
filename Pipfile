@@ -13,6 +13,8 @@ django-database-url = "*"
 psycopg2 = "*"
 gunicorn = "*"
 whitenoise = "*"
+django-enumfield = "*"
+archeryutils = {ref = "b0e6035c965793ec14c30147980e155994a65d21", git = "git+https://github.com/jatkinson1000/archeryutils.git"}
 
 [dev-packages]
 
