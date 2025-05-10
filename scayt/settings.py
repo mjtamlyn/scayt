@@ -6,12 +6,12 @@ import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-DEBUG = not os.environ.get('PRODUCTION')
-SECRET_KEY = os.environ.get('SECRET_KEY', 'this-secret-is-bad')
+DEBUG = not os.environ.get("PRODUCTION")
+SECRET_KEY = os.environ.get("SECRET_KEY", "this-secret-is-bad")
 ALLOWED_HOSTS = [
-    'localhost',
-    'scayt.mjtamlyn.co.uk',
-    'scayt.scasarchery.org.uk',
+    "localhost",
+    "scayt.mjtamlyn.co.uk",
+    "scayt.scasarchery.org.uk",
 ]
 
 
@@ -19,7 +19,6 @@ ALLOWED_HOSTS = [
 
 INSTALLED_APPS = [
     "scayt",
-
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -61,7 +60,7 @@ WSGI_APPLICATION = "scayt.wsgi.application"
 
 
 # Database
-DATABASES = {'default': dj_database_url.config(default='postgres://localhost/scayt')}
+DATABASES = {"default": dj_database_url.config(default="postgres://localhost/scayt")}
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
@@ -92,7 +91,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = "static/"
 STATICFILES_DIRS = [
-    BASE_DIR / 'node_modules/cirrus-ui/dist/',
+    BASE_DIR / "node_modules/cirrus-ui/dist/",
 ]
-STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static')
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+STATIC_ROOT = os.path.join(BASE_DIR, "collected_static")
+STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
