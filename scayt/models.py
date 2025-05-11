@@ -80,7 +80,10 @@ class Event(models.Model):
         """,
     )
     entry_link = models.URLField(blank=True, null=True)
-    # TODO link to online results
+    full_results = models.URLField(blank=True, null=True)
+
+    def has_results(self):
+        return self.result_set.exists()
 
     def __str__(self):
         return self.name
@@ -182,3 +185,19 @@ class Result(models.Model):
         if not self.age_group_competed:
             self.age_group_competed = self.archer_season.age_group
         super().save(*args, **kwargs)
+
+    @property
+    def division(self):
+        return '%s %s %s' % (
+            self.age_group_competed,
+            self.archer_season.bowstyle,
+            self.archer_season.archer.gender,
+        )
+
+    @property
+    def scayt_points(self):
+        if self.placing == 1:
+            return 3
+        elif self.placing == 2:
+            return 2
+        return 1

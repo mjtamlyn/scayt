@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="m-4">
+    <a href="{% url 'calendar' %}" class="u u-LR">&lt; Back to {{ event.season.year }} calendar</a>
+</div>
+<div class="m-4">
+    <h3>Results for {{ event }}</h3>
+    <h6>Shot on {{ event.date }}</h6>
+
+    <p>
+        This page reproduces only the results which are relevant to SCAYT. Many
+        events also include additional entries from adult archers.
+        {% if event.full_results %}
+        The original full results for the event can be found
+        <a class="y y-LR" href="{{ event.full_results }}">here</a>.
+        {% endif %}
+    </p>
+
+    <div class="table-container">
+        <table class="table bordered">
+            <thead>
+                <tr class="bg-green-300">
+                    <th>Position</th>
+                    <th><dvi style="white-space:normal; cursor: help; text-decoration: underline dotted" class="tooltip tooltip--bottom" data-tooltip="Base SCAYT points, unadjusted if more than 3 events shot.">Points</div></th>
+                    <th>Name</th>
+                    <th colspan="{{ results.0.shot_round.passes|length }}">Distance scores</th>
+                    <th>Score</th>
+                    <th>Hits</th>
+                    <th>Golds</th>
+                </tr>
+            </thead>
+            {% for result in results %}
+            {% ifchanged result.division %}
+            <tr class="bg-green-200">
+                <th colspan="20">{{ result.division }} - {{ result.shot_round.name }}</th>
+            </tr>
+            {% endifchanged %}
+            <tr>
+                <td class="u-text-center">{{ result.placing }}</td>
+                <td class="u-text-center">{{ result.scayt_points }}</td>
+                <td class="u-text-left">{{ result.archer_season.archer }}</td>
+
+                {% if result.pass_1 %}
+                    <td class="u-text-center">{{ result.pass_1 }}</td>
+                {% endif %}
+                {% if result.pass_2 %}
+                    <td class="u-text-center">{{ result.pass_2 }}</td>
+                {% endif %}
+                {% if result.pass_3 %}
+                    <td class="u-text-center">{{ result.pass_3 }}</td>
+                {% endif %}
+                {% if result.pass_4 %}
+                    <td class="u-text-center">{{ result.pass_4 }}</td>
+                {% endif %}
+
+                <td class="u-text-center"><strong>{{ result.score }}</strong></td>
+
+                {% if result.shot_round.passes.0.scoring_system == "5_zone" %}
+                    <td class="u-text-center">{{ result.hits }}</td>
+                    <td class="u-text-center">{{ result.golds }}</td>
+                {% else %}
+                    <td class="u-text-center">{{ result.golds }}</td>
+                    <td class="u-text-center">{{ result.xs }}</td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% endblock %}

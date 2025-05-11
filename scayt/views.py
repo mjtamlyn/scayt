@@ -1,7 +1,7 @@
-from django.views.generic import ListView, TemplateView
+from django.views.generic import DetailView, ListView, TemplateView
 from django.utils import timezone
 
-from .models import Season
+from .models import Event, Season
 
 
 class Root(TemplateView):
@@ -40,6 +40,21 @@ class FAQs(Root):
         context = super().get_context_data(**kwargs)
         context["page_title"] = "FAQs"
         context["page_name"] = "faqs"
+        return context
+
+
+class EventResults(DetailView):
+    model = Event
+    template_name = "scayt/event_results.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["results"] = self.object.result_set.order_by(
+            'archer_season__bowstyle',
+            'age_group_competed',
+            'archer_season__archer__gender',
+            'placing',
+        ).select_related('archer_season', 'archer_season__archer')
         return context
 
 

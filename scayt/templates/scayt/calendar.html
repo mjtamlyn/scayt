@@ -27,19 +27,25 @@
                     <th><div style="white-space: normal; cursor: help; text-decoration: underline dotted" class="tooltip tooltip--bottom" data-tooltip="Approximate location only, always check event information for directions.">Postcode</div></th>
                     <th><div style="white-space: normal; cursor: help; text-decoration: underline dotted" class="tooltip tooltip--bottom" data-tooltip="May not include all rounds in this family">Rounds</div></th>
                     <th><div style="white-space: normal; cursor: help; text-decoration: underline dotted" class="tooltip tooltip--bottom" data-tooltip="Not all age categories will necessarily be awarded medals, but suitable distance rounds are available.">Age groups</div></th>
+                    <th>Results</th>
                 </tr>
             </thead>
             {% for event in events %}
                 <tr>
                     <td class="u-text-left">{{ forloop.counter }}</td>
                     <td class="u-text-left">{{ event.date }}</td>
-                    <td class="u-text-left"><a class="u u-LR" href="{{ event.entry_link }}">{{ event.name }}</a></td>
+                    <td><a class="u u-LR" href="{{ event.entry_link }}">{{ event.name }}</a></td>
                     <td class="u-text-left"><a class="u u-LR" href="https://www.google.com/maps/place/{{ event.venue.post_code }}/">{{ event.venue.post_code }}</a></td>
                     <td class="u-text-left">{{ event.get_round_family_display }}</td>
                     <td class="u-text-left">
                         {% for age in event.age_groups %}
                         <span class="tag tag--xs bg-green-500">{{ age }}</span>
                         {% endfor %}
+                    </td>
+                    <td>
+                        {% if event.has_results %}
+                        <a class="u u-LR" href="{% url 'event-results' pk=event.pk %}">Results</a>
+                        {% endif %}
                     </td>
                 </tr>
             {% endfor %}
