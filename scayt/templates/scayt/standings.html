@@ -3,7 +3,11 @@
 {% block content %}
 <div class="m-4">
     <h3>{{ season.year }} Standings</h3>
-    <p>Standings will be updated in due course as the events take place.</p>
+
+    <div class="toast toast--primary">
+        <h4 class="toast__title">Work in progress</h4>
+        <p>Combined standings are not yet ready, you can find results and SCAYT points awarded for individual events on the <a class="u u-LR" href="{% url 'calendar' %}">calendar</a>.</p>
+    </div>
 
     <div class="row">
         <div class="col-3">

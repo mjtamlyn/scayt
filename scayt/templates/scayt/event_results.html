@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load scayt %}
+
 {% block content %}
 <div class="m-4">
     <a href="{% url 'calendar' %}" class="u u-LR">&lt; Back to {{ event.season.year }} calendar</a>
@@ -22,13 +24,13 @@
             <thead>
                 <tr class="bg-green-300">
                     <th>Position</th>
-                    <th><dvi style="white-space:normal; cursor: help; text-decoration: underline dotted" class="tooltip tooltip--bottom" data-tooltip="Base SCAYT points, unadjusted if more than 3 events shot.">Points</div></th>
+                    <th><div style="white-space:normal; cursor: help; text-decoration: underline dotted" class="tooltip tooltip--bottom" data-tooltip="Base SCAYT points, unadjusted if more than 3 events shot.">Points</div></th>
                     <th>Name</th>
                     <th colspan="{{ results.0.shot_round.passes|length }}">Distance scores</th>
                     <th>Score</th>
                     <th>Hits</th>
                     <th>Golds</th>
-                    <th>Classification</th>
+                    <th><div style="white-space:normal; cursor: help; text-decoration: underline dotted" class="tooltip tooltip--bottom" data-tooltip="Archery GB Classification for the score achieved. Calculated for the athlete's actual age group, which may not match the competition.">Class.</a></th>
                 </tr>
             </thead>
             {% for result in results %}
@@ -65,7 +67,7 @@
                     <td class="u-text-center">{{ result.xs }}</td>
                 {% endif %}
 
-                <td>{{ result.classification }}</td>
+                <td>{{ result.classification|tag }}</td>
             </tr>
             {% endfor %}
         </table>
