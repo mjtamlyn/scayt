@@ -4,6 +4,10 @@ from archeryutils.classifications import AGB_ages, AGB_bowstyles, AGB_genders
 from archeryutils.classifications.agb_outdoor_classifications import (
     outdoor_bowstyles,
 )
+from archeryutils.classifications.classification_utils import (
+    read_ages_json,
+    read_bowstyles_json,
+)
 from archeryutils.rounds import Round
 from django_enumfield.enum import Enum as DbEnum
 from django_enumfield.db.fields import EnumField
@@ -41,7 +45,6 @@ class RoundField(models.CharField):
         return self._round_dict[value]
 
     def to_python(self, value):
-        print(value)
         if isinstance(value, Round):
             return value.codename
 
@@ -64,16 +67,16 @@ class RoundField(models.CharField):
         return forms.RoundField(rounds=self.rounds, required=not self.blank)
 
 
+bowstyles_data = read_bowstyles_json()
 DbBowstyles = DbEnum(
     "DbBowstyles",
     [(item.name, item.value) for item in AGB_bowstyles if item in outdoor_bowstyles],
 )
-DbBowstyles.__labels__ = {
-    DbBowstyles.RECURVE: "Recurve",
-    DbBowstyles.COMPOUND: "Compound",
-    DbBowstyles.BAREBOW: "Barebow",
-    DbBowstyles.LONGBOW: "Longbow",
-}
+DbBowstyles.__labels__ = {}
+for bowstyle in outdoor_bowstyles:
+    DbBowstyles.__labels__[DbBowstyles[bowstyle.name]] = bowstyles_data[bowstyle.name][
+        "bowstyle"
+    ]
 
 
 class BowstyleField(EnumField):
@@ -81,20 +84,14 @@ class BowstyleField(EnumField):
         super().__init__(enum, *args, **kwargs)
 
 
+ages_data = read_ages_json()
 DbAges = DbEnum(
     "DbAges",
     [(item.name, item.value) for item in AGB_ages],
 )
-DbAges.__labels__ = {
-    DbAges.AGE_50_PLUS: "50+",
-    DbAges.AGE_ADULT: "Adult",
-    DbAges.AGE_UNDER_21: "U21",
-    DbAges.AGE_UNDER_18: "U18",
-    DbAges.AGE_UNDER_16: "U16",
-    DbAges.AGE_UNDER_15: "U15",
-    DbAges.AGE_UNDER_14: "U14",
-    DbAges.AGE_UNDER_12: "U12",
-}
+DbAges.__labels__ = {}
+for key, age_data in ages_data.items():
+    DbAges.__labels__[DbAges[key]] = age_data["age_group"]
 
 
 class AgeField(EnumField):
