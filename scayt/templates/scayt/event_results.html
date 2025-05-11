@@ -28,6 +28,7 @@
                     <th>Score</th>
                     <th>Hits</th>
                     <th>Golds</th>
+                    <th>Classification</th>
                 </tr>
             </thead>
             {% for result in results %}
@@ -63,6 +64,8 @@
                     <td class="u-text-center">{{ result.golds }}</td>
                     <td class="u-text-center">{{ result.xs }}</td>
                 {% endif %}
+
+                <td>{{ result.classification }}</td>
             </tr>
             {% endfor %}
         </table>

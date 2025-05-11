@@ -50,11 +50,11 @@ class EventResults(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["results"] = self.object.result_set.order_by(
-            'archer_season__bowstyle',
-            'age_group_competed',
-            'archer_season__archer__gender',
-            'placing',
-        ).select_related('archer_season', 'archer_season__archer')
+            "archer_season__bowstyle",
+            "age_group_competed",
+            "archer_season__archer__gender",
+            "placing",
+        ).select_related("archer_season", "archer_season__archer")
         return context
 
 

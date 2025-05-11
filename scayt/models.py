@@ -3,6 +3,10 @@ from django.core import validators
 from django.db import models
 
 import archeryutils
+from archeryutils.classifications import (
+    AGB_bowstyles,
+    calculate_agb_outdoor_classification,
+)
 from archerydjango.fields import (
     AgeField,
     BowstyleField,
@@ -188,7 +192,7 @@ class Result(models.Model):
 
     @property
     def division(self):
-        return '%s %s %s' % (
+        return "%s %s %s" % (
             self.age_group_competed,
             self.archer_season.bowstyle,
             self.archer_season.archer.gender,
@@ -201,3 +205,13 @@ class Result(models.Model):
         elif self.placing == 2:
             return 2
         return 1
+
+    @property
+    def classification(self):
+        return calculate_agb_outdoor_classification(
+            self.score,
+            self.shot_round,
+            AGB_bowstyles(self.archer_season.bowstyle.value),
+            self.archer_season.archer.gender,
+            self.archer_season.age_group,
+        )
