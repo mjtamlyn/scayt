@@ -202,7 +202,7 @@ class Result(models.Model):
     def scayt_points(self):
         if self.placing == 1:
             return 3
-        elif self.placing == 2:
+        elif self.placing == 2 or self.placing == 3:
             return 2
         return 1
 
