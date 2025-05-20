@@ -199,6 +199,22 @@ class Result(models.Model):
         )
 
     @property
+    def round_name(self):
+        if not self.shot_round_2:
+            return self.shot_round.name
+        if self.shot_round_2 == self.shot_round:
+            return "Double %s" % self.shot_round.name
+        return "Mixed round - %s & %s" % (self.shot_round.name, self.shot_round_2.name)
+
+    @property
+    def n_passes(self):
+        if not (self.pass_1 or self.pass_2 or self.pass_3 or self.pass_4):
+            return 0
+        if self.shot_round_2:
+            return len(self.shot_round.passes) + len(self.shot_round_2.passes)
+        return len(self.shot_round.passes)
+
+    @property
     def scayt_points(self):
         if self.placing == 1:
             return 3
@@ -208,8 +224,27 @@ class Result(models.Model):
 
     @property
     def classification(self):
+        score = self.score
+        if self.shot_round_2:
+            if not len(self.shot_round.passes) == 2:
+                raise "Unknown double round format"
+            score = self.pass_1 + self.pass_2
         return calculate_agb_outdoor_classification(
-            self.score,
+            score,
+            self.shot_round,
+            AGB_bowstyles(self.archer_season.bowstyle.value),
+            self.archer_season.archer.gender,
+            self.archer_season.age_group,
+        )
+
+    @property
+    def classification_2(self):
+        if not self.shot_round_2:
+            return None
+        if not len(self.shot_round.passes) == 2:
+            raise "Unknown double round format"
+        return calculate_agb_outdoor_classification(
+            self.pass_3 + self.pass_4,
             self.shot_round,
             AGB_bowstyles(self.archer_season.bowstyle.value),
             self.archer_season.archer.gender,

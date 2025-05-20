@@ -26,7 +26,9 @@
                     <th>Position</th>
                     <th><div style="white-space:normal; cursor: help; text-decoration: underline dotted" class="tooltip tooltip--bottom" data-tooltip="Base SCAYT points, unadjusted if more than 3 events shot.">Points</div></th>
                     <th>Name</th>
-                    <th colspan="{{ results.0.shot_round.passes|length }}">Distance scores</th>
+                    {% if results.0.n_passes %}
+                        <th colspan="{{ results.0.n_passes }}">Distance scores</th>
+                    {% endif %}
                     <th>Score</th>
                     <th>Hits</th>
                     <th>Golds</th>
@@ -36,7 +38,7 @@
             {% for result in results %}
             {% ifchanged result.division %}
             <tr class="bg-green-200">
-                <th colspan="20">{{ result.division }} - {{ result.shot_round.name }}</th>
+                <th colspan="20">{{ result.division }} - {{ result.round_name }}</th>
             </tr>
             {% endifchanged %}
             <tr>
@@ -67,7 +69,7 @@
                     <td class="u-text-center">{{ result.xs }}</td>
                 {% endif %}
 
-                <td>{{ result.classification|tag }}</td>
+                <td>{{ result.classification|tag }}{% if result.classification_2 %} / {{ result.classification_2|tag }}{% endif %}</td>
             </tr>
             {% endfor %}
         </table>
