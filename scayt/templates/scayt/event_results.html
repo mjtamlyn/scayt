@@ -15,7 +15,7 @@
         events also include additional entries from adult archers.
         {% if event.full_results %}
         The original full results for the event can be found
-        <a class="y y-LR" href="{{ event.full_results }}">here</a>.
+        <a class="u u-LR" href="{{ event.full_results }}">here</a>.
         {% endif %}
     </p>
 
@@ -30,8 +30,15 @@
                         <th colspan="{{ results.0.n_passes }}">Distance scores</th>
                     {% endif %}
                     <th>Score</th>
-                    <th>Hits</th>
-                    <th>Golds</th>
+
+                    {% if result.shot_round.passes.0.scoring_system == "5_zone" %}
+                        <th>Hits</th>
+                        <th>Golds</th>
+                    {% else %}
+                        <th>10+X</th>
+                        <th>X</th>
+                    {% endif %}
+
                     <th><div style="white-space:normal; cursor: help; text-decoration: underline dotted" class="tooltip tooltip--bottom" data-tooltip="Archery GB Classification for the score achieved. Calculated for the athlete's actual age group, which may not match the competition.">Class.</a></th>
                 </tr>
             </thead>
