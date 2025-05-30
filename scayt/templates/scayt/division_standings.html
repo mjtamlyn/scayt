@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% load scayt %}
+
+{% block content %}
+<div class="m-4">
+    <a href="{% url 'standings' %}" class="u u-LR">&lt; Back to full standings</a>
+</div>
+<div class="m-4">
+    <h3>{{ season.year }} Standings for {{ division }}</h3>
+
+    {% if placings %}
+    <div class="table-container">
+        <table class="table bordered">
+            <thead>
+                <tr class="bg-green-300">
+                    <th>Position</th>
+                    <th>Archer</th>
+                    <th>Total points</th>
+                    <th>Events completed</th>
+                </tr>
+            </thead>
+            {% for archer_season in placings %}
+            <tr>
+                <td>{{ archer_season.placing }}</td>
+                <td class="u-text-left">
+                    <a class="u u-LR" href="{% url 'individual-standings' pk=archer_season.pk %}">
+                        {{ archer_season.archer }}
+                    </a>
+                </td>
+                <td>{{ archer_season.total_scayt_points }}</td>
+                <td>{{ archer_season.result_set.all|length }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% else %}
+    <p>No archers have competed so far.</p>
+    {% endif %}
+</div>
+{% endblock %}

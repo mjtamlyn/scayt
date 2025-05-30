@@ -1,6 +1,8 @@
 from django.views.generic import DetailView, ListView, TemplateView
 from django.utils import timezone
 
+from archerydjango.fields import DbAges, DbBowstyles, DbGender
+
 from .models import ArcherSeason, Event, Season
 
 
@@ -64,6 +66,52 @@ class Standings(Root):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["season"] = Season.objects.first()
+        return context
+
+
+class DivisionStandings(TemplateView):
+    template_name = "scayt/division_standings.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["season"] = Season.objects.first()
+        bowstyle = {
+            "R": DbBowstyles.RECURVE,
+            "C": DbBowstyles.COMPOUND,
+            "B": DbBowstyles.BAREBOW,
+            "L": DbBowstyles.LONGBOW,
+        }[self.kwargs["bow"]]
+        gender = {
+            "M": DbGender.MALE,
+            "W": DbGender.FEMALE,
+        }[self.kwargs["gender"]]
+        age = DbAges["AGE_UNDER_%s" % self.kwargs["age"]]
+        context["division"] = "{bow} {age} {gender}".format(
+            bow=bowstyle,
+            age=age,
+            gender=gender,
+        )
+        archers = ArcherSeason.objects.filter(
+            age_group=age,
+            archer__gender=gender,
+            bowstyle=bowstyle,
+        ).prefetch_related("result_set")
+        context["placings"] = sorted(
+            archers, key=lambda a: a.total_scayt_points, reverse=True
+        )
+
+        placing = 0
+        current_total = None
+        placing_counter = 1
+        for archer in context["placings"]:
+            if archer.total_scayt_points == current_total:
+                placing_counter += 1
+            else:
+                current_total = archer.total_scayt_points
+                placing += placing_counter
+                placing_counter = 1
+            archer.placing = placing
+
         return context
 
 

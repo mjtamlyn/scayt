@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path
 
 from . import views
 
@@ -12,6 +12,11 @@ urlpatterns = [
         name="event-results",
     ),
     path("standings/", views.Standings.as_view(), name="standings"),
+    re_path(
+        r"^standings/(?P<bow>[RCBL])U(?P<age>\d+)(?P<gender>[MW])/$",
+        views.DivisionStandings.as_view(),
+        name="division-standings",
+    ),
     path(
         "standings/<int:pk>/",
         views.IndividualStandings.as_view(),
