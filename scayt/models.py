@@ -1,3 +1,5 @@
+from functools import cached_property
+
 from django.contrib.postgres.fields import ArrayField
 from django.core import validators
 from django.db import models
@@ -136,6 +138,20 @@ class ArcherSeason(models.Model):
                 self.season.year,
             )
         super().save(*args, **kwargs)
+
+    @cached_property
+    def annotated_results(self):
+        """Load the results, and then add `weighted_scayt_points`."""
+        results = self.result_set.order_by('event__date')
+        by_best = sorted(results, key=lambda r: r.scayt_points, reverse=True)
+        for result in by_best[:3]:
+            result.weighted_scayt_points = result.scayt_points
+        for shoot_count, result in enumerate(by_best[3:], 4):
+            result.weighted_scayt_points = float(result.scayt_points) / shoot_count
+        return results
+
+    def total_scayt_points(self):
+        return sum(map(lambda r: r.weighted_scayt_points, self.annotated_results))
 
 
 class Result(models.Model):

@@ -51,7 +51,11 @@
             <tr>
                 <td class="u-text-center">{{ result.placing }}</td>
                 <td class="u-text-center">{{ result.scayt_points }}</td>
-                <td class="u-text-left">{{ result.archer_season.archer }}</td>
+                <td class="u-text-left">
+                    <a class="u u-LR" href="{% url 'individual-standings' pk=result.archer_season_id %}">
+                        {{ result.archer_season.archer }}
+                    </a>
+                </td>
 
                 {% if result.pass_1 %}
                     <td class="u-text-center">{{ result.pass_1 }}</td>

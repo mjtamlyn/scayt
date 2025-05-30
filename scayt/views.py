@@ -1,7 +1,7 @@
 from django.views.generic import DetailView, ListView, TemplateView
 from django.utils import timezone
 
-from .models import Event, Season
+from .models import ArcherSeason, Event, Season
 
 
 class Root(TemplateView):
@@ -64,4 +64,15 @@ class Standings(Root):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["season"] = Season.objects.first()
+        return context
+
+
+class IndividualStandings(DetailView):
+    template_name = "scayt/individual_standings.html"
+    model = ArcherSeason
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["season"] = Season.objects.first()
+        context["results"] = self.object.annotated_results
         return context

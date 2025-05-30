@@ -12,6 +12,11 @@ urlpatterns = [
         name="event-results",
     ),
     path("standings/", views.Standings.as_view(), name="standings"),
+    path(
+        "standings/<int:pk>/",
+        views.IndividualStandings.as_view(),
+        name="individual-standings",
+    ),
     path("faq/", views.FAQs.as_view(), name="faqs"),
     path("admin/", admin.site.urls),
 ]
