@@ -227,6 +227,8 @@ class Result(models.Model):
     def n_passes(self):
         if not (self.pass_1 or self.pass_2 or self.pass_3 or self.pass_4):
             return 0
+        if self.pass_3 and not self.pass_2:  # Double 720 without splits
+            return 2
         if self.shot_round_2:
             return len(self.shot_round.passes) + len(self.shot_round_2.passes)
         return len(self.shot_round.passes)
@@ -245,7 +247,7 @@ class Result(models.Model):
         if self.shot_round_2:
             if not len(self.shot_round.passes) == 2:
                 raise "Unknown double round format"
-            score = self.pass_1 + self.pass_2
+            score = self.pass_1 + (self.pass_2 or 0)
         return calculate_agb_outdoor_classification(
             score,
             self.shot_round,
@@ -261,7 +263,7 @@ class Result(models.Model):
         if not len(self.shot_round.passes) == 2:
             raise "Unknown double round format"
         return calculate_agb_outdoor_classification(
-            self.pass_3 + self.pass_4,
+            self.pass_3 + (self.pass_4 or 0),
             self.shot_round,
             AGB_bowstyles(self.archer_season.bowstyle.value),
             self.archer_season.archer.gender,
