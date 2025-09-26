@@ -8,6 +8,7 @@ register = template.Library()
 def tag(classification):
     """Converts a classification into a tag"""
     colors = {
+        "N/A": "bg-gray-600",
         "UC": "bg-gray-400",
         "A3": "bg-blue-200",
         "A2": "bg-blue-400",

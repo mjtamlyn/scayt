@@ -17,6 +17,8 @@ from archerydjango.fields import (
 )
 from archerydjango.utils import get_age_group
 
+from . import custom_rounds
+
 
 ROUND_FAMILIES = [
     ("bristol", "York/Hereford/Bristols"),
@@ -163,12 +165,14 @@ class Result(models.Model):
         archeryutils.load_rounds.WA_outdoor
         | archeryutils.load_rounds.AGB_outdoor_metric
         | archeryutils.load_rounds.AGB_outdoor_imperial
+        | custom_rounds.rounds
     )
     shot_round_2 = RoundField(
         (
             archeryutils.load_rounds.WA_outdoor
             | archeryutils.load_rounds.AGB_outdoor_metric
             | archeryutils.load_rounds.AGB_outdoor_imperial
+            | custom_rounds.rounds
         ),
         blank=True,
         null=True,
@@ -248,13 +252,16 @@ class Result(models.Model):
             if not len(self.shot_round.passes) == 2:
                 raise "Unknown double round format"
             score = self.pass_1 + (self.pass_2 or 0)
-        return calculate_agb_outdoor_classification(
-            score,
-            self.shot_round,
-            AGB_bowstyles(self.archer_season.bowstyle.value),
-            self.archer_season.archer.gender,
-            self.archer_season.age_group,
-        )
+        try:
+            return calculate_agb_outdoor_classification(
+                score,
+                self.shot_round,
+                AGB_bowstyles(self.archer_season.bowstyle.value),
+                self.archer_season.archer.gender,
+                self.archer_season.age_group,
+            )
+        except ValueError:
+            return "N/A"
 
     @property
     def classification_2(self):
@@ -262,10 +269,13 @@ class Result(models.Model):
             return None
         if not len(self.shot_round.passes) == 2:
             raise "Unknown double round format"
-        return calculate_agb_outdoor_classification(
-            self.pass_3 + (self.pass_4 or 0),
-            self.shot_round,
-            AGB_bowstyles(self.archer_season.bowstyle.value),
-            self.archer_season.archer.gender,
-            self.archer_season.age_group,
-        )
+        try:
+            return calculate_agb_outdoor_classification(
+                self.pass_3 + (self.pass_4 or 0),
+                self.shot_round,
+                AGB_bowstyles(self.archer_season.bowstyle.value),
+                self.archer_season.archer.gender,
+                self.archer_season.age_group,
+            )
+        except ValueError:
+            return "N/A"
