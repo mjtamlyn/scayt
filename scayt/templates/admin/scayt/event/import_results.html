@@ -22,6 +22,42 @@
         <h2>{{ event }}</h2>
 
         <form method="post" enctype="multipart/form-data">
+            {% if data %}
+            <div>
+                <h3>{{ data|length }} rows found</h3>
+                {% if data_has_errors %}
+                <p class="errornote">{{ data_has_errors }} errors found.</p>
+                {% endif %}
+                {% for row in data %}
+                    <h3>Row {{ forloop.counter }}</h3>
+                <ul class="messagelist">
+                    {% for message in row.messages %}
+                    <li class="{{ message.level }}">{{ message.message }}</li>
+                    {% endfor %}
+                </ul>
+                <p>
+                    {{ row.archer.agb_number }} {{ row.archer }} ({{ row.season.club }})</br >
+                    {% with row.result as result %}
+                    {{ result.round_name }} shot with a score of
+                    {% if result.xs %}
+                    {{ result.score }}/{{ result.golds }}/{{ result.xs }}.
+                    {% else %}
+                    {{ result.score }}/{{ result.hits }}/{{ result.golds }}.
+                    {% endif %}
+                    {% if result.pass_1 %}
+                    Split is 
+                    {{ result.pass_1 }}{% if result.pass_2 %}/{{ result.pass_2 }}{% endif %}{% if result.pass_3 %}/{{ result.pass_3 }}{% endif %}{% if result.pass_4 %}/{{ result.pass_4 }}{% endif %}.<br />
+                    {% endif %}
+                    Placed {{ result.placing }} in {{ result.division }}.
+                    {% endwith %}
+                </p>
+                {% with row.fieldset as fieldset %}
+                    {% include "admin/includes/fieldset.html" %}
+                {% endwith %}
+                {% endfor %}
+            </div>
+            {% endif %}
+
             {% csrf_token %}
 
             {{ form.non_field_errors }}
@@ -35,7 +71,7 @@
             {% endfor %}
 
             <div class="submit-row">
-                <input type="submit" value="Upload" />
+                <input type="submit" value="{% if data %}Confirm{% else %}Upload{% endif %}" />
             </div>
         </form>
     </div>
