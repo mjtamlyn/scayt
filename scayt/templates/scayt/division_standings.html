@@ -28,7 +28,7 @@
                         {{ archer_season.archer }}
                     </a>
                 </td>
-                <td>{{ archer_season.total_scayt_points }}</td>
+                <td>{{ archer_season.total_scayt_points|floatformat:-2 }}</td>
                 <td>{{ archer_season.result_set.all|length }}</td>
             </tr>
             {% endfor %}

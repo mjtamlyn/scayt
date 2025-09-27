@@ -10,7 +10,7 @@
     <h3>Results for {{ object.archer }}</h3>
     <h6>{{ object.age_group }} {{ object.bowstyle }} {{ object.archer.gender }} - {{ object.club }}</h6>
 
-    <p><strong>Total SCAYT points:</strong> {{ object.total_scayt_points }}</p>
+    <p><strong>Total SCAYT points:</strong> {{ object.total_scayt_points|floatformat:-2 }}</p>
 
     <div class="table-container">
         <table class="table bordered">
@@ -34,7 +34,7 @@
                 </td>
                 <td class="u-text-center">{{ result.placing }}</td>
                 <td class="u-text-center">{{ result.scayt_points }}</td>
-                <td class="u-text-center">{{ result.weighted_scayt_points }}</td>
+                <td class="u-text-center">{{ result.weighted_scayt_points|floatformat:-2 }}</td>
 
                 <td class="u-text-center">{{ result.shot_round.name }}</td>
                 <td class="u-text-center"><strong>{{ result.score }}</strong></td>

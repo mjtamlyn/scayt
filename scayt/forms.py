@@ -56,6 +56,7 @@ class ImportConfirmForm(forms.Form):
                 self.base_fields[scas_field_name] = forms.BooleanField(
                     label="Is SCAS Member?",
                     initial=True,
+                    required=False,
                 )
                 row["fieldset"] = Fieldset(
                     form=self,
