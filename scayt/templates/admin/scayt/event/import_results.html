@@ -1,0 +1,43 @@
+{% extends 'admin/base_site.html' %}
+
+{% load i18n admin_urls static %}
+
+{% block title %}Import results {{ block.super }}{% endblock %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+    <a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+    &rsaquo; <a href="{% url 'admin:app_list' app_label=opts.app_label %}">{{ opts.app_config.verbose_name }}</a>
+    &rsaquo; <a href="{% url opts|admin_urlname:'changelist' %}">{{ opts.verbose_name_plural|capfirst }}</a>
+    &rsaquo; <a href="{% url opts|admin_urlname:'change' object_id=event.pk %}">{{ event }}</a>
+    &rsaquo; Import results
+</div>
+{% endblock %}
+
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" href="{% static "admin/css/forms.css" %}">{% endblock %}
+
+{% block content %}
+    <div id="content-main">
+        <h1>Import results</h1>
+        <h2>{{ event }}</h2>
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            {{ form.non_field_errors }}
+
+            {% for fieldset in form.fieldsets %}
+                {% include "admin/includes/fieldset.html" %}
+            {% endfor %}
+
+            {% for inline_formset in form.inlines %}
+                {{ inline_formset }}
+            {% endfor %}
+
+            <div class="submit-row">
+                <input type="submit" value="Upload" />
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
