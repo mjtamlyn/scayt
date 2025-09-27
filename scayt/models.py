@@ -157,23 +157,21 @@ class ArcherSeason(models.Model):
         return sum(map(lambda r: r.weighted_scayt_points, self.annotated_results))
 
 
+rounds = (
+    archeryutils.load_rounds.WA_outdoor
+    | archeryutils.load_rounds.AGB_outdoor_metric
+    | archeryutils.load_rounds.AGB_outdoor_imperial
+    | custom_rounds.rounds
+)
+
+
 class Result(models.Model):
     archer_season = models.ForeignKey(ArcherSeason, on_delete=models.PROTECT)
     event = models.ForeignKey(Event, on_delete=models.PROTECT)
     age_group_competed = AgeField(blank=True, null=True)
-    shot_round = RoundField(
-        archeryutils.load_rounds.WA_outdoor
-        | archeryutils.load_rounds.AGB_outdoor_metric
-        | archeryutils.load_rounds.AGB_outdoor_imperial
-        | custom_rounds.rounds
-    )
+    shot_round = RoundField(rounds)
     shot_round_2 = RoundField(
-        (
-            archeryutils.load_rounds.WA_outdoor
-            | archeryutils.load_rounds.AGB_outdoor_metric
-            | archeryutils.load_rounds.AGB_outdoor_imperial
-            | custom_rounds.rounds
-        ),
+        rounds,
         blank=True,
         null=True,
     )
@@ -221,6 +219,8 @@ class Result(models.Model):
 
     @property
     def round_name(self):
+        if not self.shot_round:
+            return None
         if not self.shot_round_2:
             return self.shot_round.name
         if self.shot_round_2 == self.shot_round:

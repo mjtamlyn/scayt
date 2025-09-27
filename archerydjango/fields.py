@@ -77,6 +77,16 @@ for bowstyle in outdoor_bowstyles:
     DbBowstyles.__labels__[DbBowstyles[bowstyle.name]] = bowstyles_data[bowstyle.name][
         "bowstyle"
     ]
+DbBowstyles.__lookup__ = {
+    "Recurve": DbBowstyles.RECURVE,
+    "Compound": DbBowstyles.COMPOUND,
+    "Barebow": DbBowstyles.BAREBOW,
+    "Longbow": DbBowstyles.LONGBOW,
+    "R": DbBowstyles.RECURVE,
+    "C": DbBowstyles.COMPOUND,
+    "B": DbBowstyles.BAREBOW,
+    "L": DbBowstyles.LONGBOW,
+}
 
 
 class BowstyleField(EnumField):
@@ -92,6 +102,16 @@ DbAges = DbEnum(
 DbAges.__labels__ = {}
 for key, age_data in ages_data.items():
     DbAges.__labels__[DbAges[key]] = age_data["age_group"]
+DbAges.__lookup__ = {
+    "": DbAges.AGE_ADULT,
+    "50": DbAges.AGE_50_PLUS,
+    "U21": DbAges.AGE_UNDER_21,
+    "U18": DbAges.AGE_UNDER_18,
+    "U16": DbAges.AGE_UNDER_16,
+    "U15": DbAges.AGE_UNDER_15,
+    "U14": DbAges.AGE_UNDER_14,
+    "U12": DbAges.AGE_UNDER_12,
+}
 
 
 class AgeField(EnumField):
@@ -106,6 +126,10 @@ DbGender = DbEnum(
 DbGender.__labels__ = {
     DbGender.MALE: "Men",
     DbGender.FEMALE: "Women",
+}
+DbGender.__lookup__ = {
+    "M": DbGender.MALE,
+    "W": DbGender.FEMALE,
 }
 
 
