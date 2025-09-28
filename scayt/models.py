@@ -74,6 +74,7 @@ def default_age_groups():
 
 class Event(models.Model):
     season = models.ForeignKey(Season, on_delete=models.PROTECT)
+    is_final = models.BooleanField(blank=True, default=False)
     venue = models.ForeignKey(Venue, on_delete=models.PROTECT)
     name = models.CharField(max_length=255)
     date = models.DateField()
@@ -144,12 +145,16 @@ class ArcherSeason(models.Model):
     @cached_property
     def annotated_results(self):
         """Load the results, and then add `weighted_scayt_points`."""
-        results = self.result_set.order_by("event__date")
+        results = self.result_set.order_by("event__date").exclude(event__is_final=True)
         by_best = sorted(results, key=lambda r: r.scayt_points, reverse=True)
         for result in by_best[:3]:
             result.weighted_scayt_points = result.scayt_points
         for shoot_count, result in enumerate(by_best[3:], 4):
             result.weighted_scayt_points = float(result.scayt_points) / shoot_count
+        final_result = self.result_set.filter(event__is_final=True).first()
+        if final_result:
+            final_result.weighted_scayt_points = final_result.scayt_points
+            results = list(results) + [final_result]
         return results
 
     @property
@@ -239,6 +244,14 @@ class Result(models.Model):
 
     @property
     def scayt_points(self):
+        if self.event.is_final:
+            if self.placing == 1:
+                return 6
+            elif self.placing == 2:
+                return 4
+            elif self.placing == 3:
+                return 3
+            return 2
         if self.placing == 1:
             return 3
         elif self.placing == 2 or self.placing == 3:

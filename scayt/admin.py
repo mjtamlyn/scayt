@@ -323,7 +323,11 @@ class ImportResultsView(SingleObjectMixin, FormView):
                 row["result"].save()
 
 
-admin.site.register(Archer)
+@admin.register(Archer)
+class ArcherAdmin(admin.ModelAdmin):
+    search_fields = ['forename', 'surname']
+
+
 admin.site.register(ArcherSeason)
 admin.site.register(Result)
 admin.site.register(Season)
