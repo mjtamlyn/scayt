@@ -12,6 +12,7 @@ urlpatterns = [
         name="event-results",
     ),
     path("standings/", views.Standings.as_view(), name="standings"),
+    path("standings/final/", views.FinalStandings.as_view(), name="final-standings"),
     re_path(
         r"^standings/(?P<bow>[RCBL])U(?P<age>\d+)(?P<gender>[MW])/$",
         views.DivisionStandings.as_view(),

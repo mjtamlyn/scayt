@@ -1,3 +1,6 @@
+import itertools
+
+from django.db.models import Count
 from django.views.generic import DetailView, ListView, TemplateView
 from django.utils import timezone
 
@@ -66,6 +69,59 @@ class Standings(Root):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["season"] = Season.objects.first()
+        return context
+
+
+class FinalStandings(TemplateView):
+    template_name = "scayt/final_standings.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["season"] = Season.objects.first()
+
+        categories = itertools.product(
+            DbBowstyles,
+            (a for a in DbAges if str(a).startswith("U")),
+            DbGender,
+        )
+        all_placings = []
+        for bowstyle, age, gender in categories:
+            division = "{bow} {age} {gender}".format(
+                bow=bowstyle,
+                age=age,
+                gender=gender,
+            )
+            archers = (
+                ArcherSeason.objects.annotate(
+                    event_count=Count("result"),
+                )
+                .filter(
+                    event_count__gte=3,
+                    age_group=age,
+                    archer__gender=gender,
+                    bowstyle=bowstyle,
+                    archer__is_scas_member=True,
+                )
+                .prefetch_related("result_set")
+            )
+
+            placings = sorted(archers, key=lambda a: a.total_scayt_points, reverse=True)
+
+            placing = 0
+            current_total = None
+            placing_counter = 1
+            for archer in placings:
+                if archer.total_scayt_points == current_total:
+                    placing_counter += 1
+                else:
+                    current_total = archer.total_scayt_points
+                    placing += placing_counter
+                    placing_counter = 1
+                archer.placing = placing
+
+            if len(archers):
+                all_placings.append((division, placings))
+        context["all_placings"] = all_placings
         return context
 
 

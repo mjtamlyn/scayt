@@ -325,7 +325,7 @@ class ImportResultsView(SingleObjectMixin, FormView):
 
 @admin.register(Archer)
 class ArcherAdmin(admin.ModelAdmin):
-    search_fields = ['forename', 'surname']
+    search_fields = ["forename", "surname"]
 
 
 admin.site.register(ArcherSeason)
