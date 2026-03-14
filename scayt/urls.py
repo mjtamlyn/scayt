@@ -6,15 +6,27 @@ from . import views
 urlpatterns = [
     path("", views.Root.as_view(), name="root"),
     path("calendar/", views.Calendar.as_view(), name="calendar"),
+    path("<int:year>/calendar/", views.Calendar.as_view(), name="calendar"),
     path(
         "results/<int:pk>/",
         views.EventResults.as_view(),
         name="event-results",
     ),
     path("standings/", views.Standings.as_view(), name="standings"),
+    path("<int:year>/standings/", views.Standings.as_view(), name="standings"),
     path("standings/final/", views.FinalStandings.as_view(), name="final-standings"),
+    path(
+        "<int:year>/standings/final/",
+        views.FinalStandings.as_view(),
+        name="final-standings",
+    ),
     re_path(
         r"^standings/(?P<bow>[RCBL])U(?P<age>\d+)(?P<gender>[MW])/$",
+        views.DivisionStandings.as_view(),
+        name="division-standings",
+    ),
+    re_path(
+        r"^(?P<year>\d{4})/standings/(?P<bow>[RCBL])U(?P<age>\d+)(?P<gender>[MW])/$",
         views.DivisionStandings.as_view(),
         name="division-standings",
     ),

@@ -4,6 +4,7 @@
 <div class="m-4">
     <h3>{{ season.year }} Calendar</h3>
 
+    {% if season.is_current %}
     <p>
         The current list of shoots which are part of the SCAYT Tour
         {{ season.year }} are shown below. Additional events will be added in
@@ -16,6 +17,15 @@
         <a class="u u-LR" href="mailto:scayt.organiser@scasarchery.org.uk">scayt.organiser@scasarchery.org.uk</a>
         for more information.
     </p>
+    {% else %}
+    <p>
+        The list of shoots which were part of the SCAYT Tour
+        in the {{ season.year }} season are shown below.
+    </p>
+    <p>
+        <a class="btn bg-blue-400 border-blue-700 text-blue-100" href="{% url 'final-standings' year=season.year %}">Final standings</a>
+    </p>
+    {% endif %}
 
     <div class="table-container">
         <table class="table striped">
@@ -51,10 +61,5 @@
             {% endfor %}
         </table>
     </div>
-
-    <h4>Provisional events</h4>
-    <ul>
-        <li><strong>Parkfield Archers Junior Goldmine</strong> – Provisionally 31/08/25</li>
-    </ul>
 </div>
 {% endblock %}

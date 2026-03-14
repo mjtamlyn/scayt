@@ -4,10 +4,10 @@
 
 {% block content %}
 <div class="m-4">
-    <a href="{% url 'standings' %}" class="u u-LR">&lt; Back to full standings</a>
+    <a href="{% season_url 'standings' season %}" class="u u-LR">&lt; Back to full standings</a>
 </div>
 <div class="m-4">
-    <h3>Results for {{ object.archer }}</h3>
+    <h3>{{ season.year }} results for {{ object.archer }}</h3>
     <h6>{{ object.age_group }} {{ object.bowstyle }} {{ object.archer.gender }} - {{ object.club }}</h6>
 
     <p><strong>Total SCAYT points:</strong> {{ object.total_scayt_points|floatformat:-2 }}</p>

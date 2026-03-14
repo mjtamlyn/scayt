@@ -4,7 +4,7 @@
 
 {% block content %}
 <div class="m-4">
-    <a href="{% url 'standings' %}" class="u u-LR">&lt; Back to all standings</a>
+    <a href="{% season_url 'standings' season %}" class="u u-LR">&lt; Back to all standings</a>
 </div>
 <div class="m-4">
     <h3>{{ season.year }} Final Standings</h3>

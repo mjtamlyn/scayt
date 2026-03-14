@@ -1,4 +1,5 @@
 from django import template
+from django.urls import reverse
 from django.utils.safestring import mark_safe
 
 register = template.Library()
@@ -26,3 +27,11 @@ def tag(classification):
             color=color, classification=classification
         )
     )
+
+
+@register.simple_tag
+def season_url(name, season, **kwargs):
+    if season.is_current:
+        return reverse(name, kwargs=kwargs)
+    kwargs["year"] = season.year
+    return reverse(name, kwargs=kwargs)

@@ -17,23 +17,43 @@ class Root(TemplateView):
         upcoming_events = season.event_set.order_by("date", "name").filter(
             date__gte=timezone.now().date()
         )[:3]
+        previous_seasons = Season.objects.exclude(pk=season.pk).order_by("-year")
         return super().get_context_data(
-            season=season, page_name="root", upcoming_events=upcoming_events, **kwargs
+            current_season=season,
+            season=season,
+            page_name="root",
+            upcoming_events=upcoming_events,
+            previous_seasons=previous_seasons,
+            **kwargs
         )
 
 
-class Calendar(ListView):
+class SeasonMixin:
+    def get_season(self):
+        if "year" in self.kwargs:
+            season = Season.objects.get(year=self.kwargs["year"])
+        else:
+            season = Season.objects.first()
+        return season
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["current_season"] = Season.objects.first()
+        return context
+
+
+class Calendar(SeasonMixin, ListView):
     template_name = "scayt/calendar.html"
     context_object_name = "events"
 
     def get_queryset(self):
-        self.season = Season.objects.first()
+        self.season = self.get_season()
         return self.season.event_set.order_by("date", "name").select_related("venue")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["season"] = self.season
-        context["page_name"] = "calendar"
+        context["page_name"] = "calendar" if self.season.is_current else ""
         context["page_title"] = "%s Calendar" % self.season.year
         return context
 
@@ -63,21 +83,22 @@ class EventResults(DetailView):
         return context
 
 
-class Standings(Root):
+class Standings(SeasonMixin, Root):
     template_name = "scayt/standings.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["season"] = Season.objects.first()
+        context["season"] = self.get_season()
         return context
 
 
-class FinalStandings(TemplateView):
+class FinalStandings(SeasonMixin, TemplateView):
     template_name = "scayt/final_standings.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["season"] = Season.objects.first()
+        season = self.get_season()
+        context["season"] = season
 
         categories = itertools.product(
             DbBowstyles,
@@ -92,7 +113,8 @@ class FinalStandings(TemplateView):
                 gender=gender,
             )
             archers = (
-                ArcherSeason.objects.annotate(
+                ArcherSeason.objects.filter(season=season)
+                .annotate(
                     event_count=Count("result"),
                 )
                 .filter(
@@ -125,12 +147,13 @@ class FinalStandings(TemplateView):
         return context
 
 
-class DivisionStandings(TemplateView):
+class DivisionStandings(SeasonMixin, TemplateView):
     template_name = "scayt/division_standings.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["season"] = Season.objects.first()
+        season = self.get_season()
+        context["season"] = season
         bowstyle = {
             "R": DbBowstyles.RECURVE,
             "C": DbBowstyles.COMPOUND,
@@ -148,6 +171,7 @@ class DivisionStandings(TemplateView):
             gender=gender,
         )
         archers = ArcherSeason.objects.filter(
+            season=season,
             age_group=age,
             archer__gender=gender,
             bowstyle=bowstyle,
@@ -177,6 +201,7 @@ class IndividualStandings(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["season"] = Season.objects.first()
+        context["current_season"] = Season.objects.first()
+        context["season"] = self.object.season
         context["results"] = self.object.annotated_results
         return context

@@ -3,6 +3,7 @@ from functools import cached_property
 from django.contrib.postgres.fields import ArrayField
 from django.core import validators
 from django.db import models
+from django.utils import timezone
 
 import archeryutils
 from archeryutils.classifications import (
@@ -54,6 +55,10 @@ class Season(models.Model):
 
     class Meta:
         ordering = ["-year"]
+
+    @property
+    def is_current(self):
+        return self.year == timezone.now().year
 
 
 class Venue(models.Model):

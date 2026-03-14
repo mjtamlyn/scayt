@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load scayt %}
+
 {% block content %}
 <div class="m-4">
     <h3>{{ season.year }} Standings</h3>
@@ -12,20 +14,20 @@
                 </div>
                 <div class="row">
                     <div class="col-6 rtl">
-                        <a class="btn bg-teal-400 border-teal-700 text-teal-100" href="{% url 'division-standings' bow='R' gender='W' age='21' %}">U21 Women</a>
-                        <a class="btn bg-teal-400 border-teal-700 text-teal-100" href="{% url 'division-standings' bow='R' gender='W' age='18' %}">U18 Women</a>
-                        <a class="btn bg-teal-400 border-teal-700 text-teal-100" href="{% url 'division-standings' bow='R' gender='W' age='16' %}">U16 Women</a>
-                        <a class="btn bg-teal-400 border-teal-700 text-teal-100" href="{% url 'division-standings' bow='R' gender='W' age='15' %}">U15 Women</a>
-                        <a class="btn bg-teal-400 border-teal-700 text-teal-100" href="{% url 'division-standings' bow='R' gender='W' age='14' %}">U14 Women</a>
-                        <a class="btn bg-teal-400 border-teal-700 text-teal-100" href="{% url 'division-standings' bow='R' gender='W' age='12' %}">U12 Women</a>
+                        <a class="btn bg-teal-400 border-teal-700 text-teal-100" href="{% season_url 'division-standings' season bow='R' gender='W' age='21' %}">U21 Women</a>
+                        <a class="btn bg-teal-400 border-teal-700 text-teal-100" href="{% season_url 'division-standings' season bow='R' gender='W' age='18' %}">U18 Women</a>
+                        <a class="btn bg-teal-400 border-teal-700 text-teal-100" href="{% season_url 'division-standings' season bow='R' gender='W' age='16' %}">U16 Women</a>
+                        <a class="btn bg-teal-400 border-teal-700 text-teal-100" href="{% season_url 'division-standings' season bow='R' gender='W' age='15' %}">U15 Women</a>
+                        <a class="btn bg-teal-400 border-teal-700 text-teal-100" href="{% season_url 'division-standings' season bow='R' gender='W' age='14' %}">U14 Women</a>
+                        <a class="btn bg-teal-400 border-teal-700 text-teal-100" href="{% season_url 'division-standings' season bow='R' gender='W' age='12' %}">U12 Women</a>
                     </div>
                     <div class="col-6">
-                        <a class="btn bg-green-400 border-green-700 text-green-100" href="{% url 'division-standings' bow='R' gender='M' age='21' %}">U21 Men</a>
-                        <a class="btn bg-green-400 border-green-700 text-green-100" href="{% url 'division-standings' bow='R' gender='M' age='18' %}">U18 Men</a>
-                        <a class="btn bg-green-400 border-green-700 text-green-100" href="{% url 'division-standings' bow='R' gender='M' age='16' %}">U16 Men</a>
-                        <a class="btn bg-green-400 border-green-700 text-green-100" href="{% url 'division-standings' bow='R' gender='M' age='15' %}">U15 Men</a>
-                        <a class="btn bg-green-400 border-green-700 text-green-100" href="{% url 'division-standings' bow='R' gender='M' age='14' %}">U14 Men</a>
-                        <a class="btn bg-green-400 border-green-700 text-green-100" href="{% url 'division-standings' bow='R' gender='M' age='12' %}">U12 Men</a>
+                        <a class="btn bg-green-400 border-green-700 text-green-100" href="{% season_url 'division-standings' season bow='R' gender='M' age='21' %}">U21 Men</a>
+                        <a class="btn bg-green-400 border-green-700 text-green-100" href="{% season_url 'division-standings' season bow='R' gender='M' age='18' %}">U18 Men</a>
+                        <a class="btn bg-green-400 border-green-700 text-green-100" href="{% season_url 'division-standings' season bow='R' gender='M' age='16' %}">U16 Men</a>
+                        <a class="btn bg-green-400 border-green-700 text-green-100" href="{% season_url 'division-standings' season bow='R' gender='M' age='15' %}">U15 Men</a>
+                        <a class="btn bg-green-400 border-green-700 text-green-100" href="{% season_url 'division-standings' season bow='R' gender='M' age='14' %}">U14 Men</a>
+                        <a class="btn bg-green-400 border-green-700 text-green-100" href="{% season_url 'division-standings' season bow='R' gender='M' age='12' %}">U12 Men</a>
                     </div>
                 </div>
             </div>
@@ -37,20 +39,20 @@
                 </div>
                 <div class="row">
                     <div class="col-6 rtl">
-                        <a class="btn bg-teal-400 border-teal-700 text-teal-100" href="{% url 'division-standings' bow='C' gender='W' age='21' %}">U21 Women</a>
-                        <a class="btn bg-teal-400 border-teal-700 text-teal-100" href="{% url 'division-standings' bow='C' gender='W' age='18' %}">U18 Women</a>
-                        <a class="btn bg-teal-400 border-teal-700 text-teal-100" href="{% url 'division-standings' bow='C' gender='W' age='16' %}">U16 Women</a>
-                        <a class="btn bg-teal-400 border-teal-700 text-teal-100" href="{% url 'division-standings' bow='C' gender='W' age='15' %}">U15 Women</a>
-                        <a class="btn bg-teal-400 border-teal-700 text-teal-100" href="{% url 'division-standings' bow='C' gender='W' age='14' %}">U14 Women</a>
-                        <a class="btn bg-teal-400 border-teal-700 text-teal-100" href="{% url 'division-standings' bow='C' gender='W' age='12' %}">U12 Women</a>
+                        <a class="btn bg-teal-400 border-teal-700 text-teal-100" href="{% season_url 'division-standings' season bow='C' gender='W' age='21' %}">U21 Women</a>
+                        <a class="btn bg-teal-400 border-teal-700 text-teal-100" href="{% season_url 'division-standings' season bow='C' gender='W' age='18' %}">U18 Women</a>
+                        <a class="btn bg-teal-400 border-teal-700 text-teal-100" href="{% season_url 'division-standings' season bow='C' gender='W' age='16' %}">U16 Women</a>
+                        <a class="btn bg-teal-400 border-teal-700 text-teal-100" href="{% season_url 'division-standings' season bow='C' gender='W' age='15' %}">U15 Women</a>
+                        <a class="btn bg-teal-400 border-teal-700 text-teal-100" href="{% season_url 'division-standings' season bow='C' gender='W' age='14' %}">U14 Women</a>
+                        <a class="btn bg-teal-400 border-teal-700 text-teal-100" href="{% season_url 'division-standings' season bow='C' gender='W' age='12' %}">U12 Women</a>
                     </div>
                     <div class="col-6">
-                        <a class="btn bg-green-400 border-green-700 text-green-100" href="{% url 'division-standings' bow='C' gender='M' age='21' %}">U21 Men</a>
-                        <a class="btn bg-green-400 border-green-700 text-green-100" href="{% url 'division-standings' bow='C' gender='M' age='18' %}">U18 Men</a>
-                        <a class="btn bg-green-400 border-green-700 text-green-100" href="{% url 'division-standings' bow='C' gender='M' age='16' %}">U16 Men</a>
-                        <a class="btn bg-green-400 border-green-700 text-green-100" href="{% url 'division-standings' bow='C' gender='M' age='15' %}">U15 Men</a>
-                        <a class="btn bg-green-400 border-green-700 text-green-100" href="{% url 'division-standings' bow='C' gender='M' age='14' %}">U14 Men</a>
-                        <a class="btn bg-green-400 border-green-700 text-green-100" href="{% url 'division-standings' bow='C' gender='M' age='12' %}">U12 Men</a>
+                        <a class="btn bg-green-400 border-green-700 text-green-100" href="{% season_url 'division-standings' season bow='C' gender='M' age='21' %}">U21 Men</a>
+                        <a class="btn bg-green-400 border-green-700 text-green-100" href="{% season_url 'division-standings' season bow='C' gender='M' age='18' %}">U18 Men</a>
+                        <a class="btn bg-green-400 border-green-700 text-green-100" href="{% season_url 'division-standings' season bow='C' gender='M' age='16' %}">U16 Men</a>
+                        <a class="btn bg-green-400 border-green-700 text-green-100" href="{% season_url 'division-standings' season bow='C' gender='M' age='15' %}">U15 Men</a>
+                        <a class="btn bg-green-400 border-green-700 text-green-100" href="{% season_url 'division-standings' season bow='C' gender='M' age='14' %}">U14 Men</a>
+                        <a class="btn bg-green-400 border-green-700 text-green-100" href="{% season_url 'division-standings' season bow='C' gender='M' age='12' %}">U12 Men</a>
                     </div>
                 </div>
             </div>
@@ -62,20 +64,20 @@
                 </div>
                 <div class="row">
                     <div class="col-6 rtl">
-                        <a class="btn bg-teal-400 border-teal-700 text-teal-100" href="{% url 'division-standings' bow='B' gender='W' age='21' %}">U21 Women</a>
-                        <a class="btn bg-teal-400 border-teal-700 text-teal-100" href="{% url 'division-standings' bow='B' gender='W' age='18' %}">U18 Women</a>
-                        <a class="btn bg-teal-400 border-teal-700 text-teal-100" href="{% url 'division-standings' bow='B' gender='W' age='16' %}">U16 Women</a>
-                        <a class="btn bg-teal-400 border-teal-700 text-teal-100" href="{% url 'division-standings' bow='B' gender='W' age='15' %}">U15 Women</a>
-                        <a class="btn bg-teal-400 border-teal-700 text-teal-100" href="{% url 'division-standings' bow='B' gender='W' age='14' %}">U14 Women</a>
-                        <a class="btn bg-teal-400 border-teal-700 text-teal-100" href="{% url 'division-standings' bow='B' gender='W' age='12' %}">U12 Women</a>
+                        <a class="btn bg-teal-400 border-teal-700 text-teal-100" href="{% season_url 'division-standings' season bow='B' gender='W' age='21' %}">U21 Women</a>
+                        <a class="btn bg-teal-400 border-teal-700 text-teal-100" href="{% season_url 'division-standings' season bow='B' gender='W' age='18' %}">U18 Women</a>
+                        <a class="btn bg-teal-400 border-teal-700 text-teal-100" href="{% season_url 'division-standings' season bow='B' gender='W' age='16' %}">U16 Women</a>
+                        <a class="btn bg-teal-400 border-teal-700 text-teal-100" href="{% season_url 'division-standings' season bow='B' gender='W' age='15' %}">U15 Women</a>
+                        <a class="btn bg-teal-400 border-teal-700 text-teal-100" href="{% season_url 'division-standings' season bow='B' gender='W' age='14' %}">U14 Women</a>
+                        <a class="btn bg-teal-400 border-teal-700 text-teal-100" href="{% season_url 'division-standings' season bow='B' gender='W' age='12' %}">U12 Women</a>
                     </div>
                     <div class="col-6">
-                        <a class="btn bg-green-400 border-green-700 text-green-100" href="{% url 'division-standings' bow='B' gender='M' age='21' %}">U21 Men</a>
-                        <a class="btn bg-green-400 border-green-700 text-green-100" href="{% url 'division-standings' bow='B' gender='M' age='18' %}">U18 Men</a>
-                        <a class="btn bg-green-400 border-green-700 text-green-100" href="{% url 'division-standings' bow='B' gender='M' age='16' %}">U16 Men</a>
-                        <a class="btn bg-green-400 border-green-700 text-green-100" href="{% url 'division-standings' bow='B' gender='M' age='15' %}">U15 Men</a>
-                        <a class="btn bg-green-400 border-green-700 text-green-100" href="{% url 'division-standings' bow='B' gender='M' age='14' %}">U14 Men</a>
-                        <a class="btn bg-green-400 border-green-700 text-green-100" href="{% url 'division-standings' bow='B' gender='M' age='12' %}">U12 Men</a>
+                        <a class="btn bg-green-400 border-green-700 text-green-100" href="{% season_url 'division-standings' season bow='B' gender='M' age='21' %}">U21 Men</a>
+                        <a class="btn bg-green-400 border-green-700 text-green-100" href="{% season_url 'division-standings' season bow='B' gender='M' age='18' %}">U18 Men</a>
+                        <a class="btn bg-green-400 border-green-700 text-green-100" href="{% season_url 'division-standings' season bow='B' gender='M' age='16' %}">U16 Men</a>
+                        <a class="btn bg-green-400 border-green-700 text-green-100" href="{% season_url 'division-standings' season bow='B' gender='M' age='15' %}">U15 Men</a>
+                        <a class="btn bg-green-400 border-green-700 text-green-100" href="{% season_url 'division-standings' season bow='B' gender='M' age='14' %}">U14 Men</a>
+                        <a class="btn bg-green-400 border-green-700 text-green-100" href="{% season_url 'division-standings' season bow='B' gender='M' age='12' %}">U12 Men</a>
                     </div>
                 </div>
             </div>
@@ -87,20 +89,20 @@
                 </div>
                 <div class="row">
                     <div class="col-6 rtl">
-                        <a class="btn bg-teal-400 border-teal-700 text-teal-100" href="{% url 'division-standings' bow='L' gender='W' age='21' %}">U21 Women</a>
-                        <a class="btn bg-teal-400 border-teal-700 text-teal-100" href="{% url 'division-standings' bow='L' gender='W' age='18' %}">U18 Women</a>
-                        <a class="btn bg-teal-400 border-teal-700 text-teal-100" href="{% url 'division-standings' bow='L' gender='W' age='16' %}">U16 Women</a>
-                        <a class="btn bg-teal-400 border-teal-700 text-teal-100" href="{% url 'division-standings' bow='L' gender='W' age='15' %}">U15 Women</a>
-                        <a class="btn bg-teal-400 border-teal-700 text-teal-100" href="{% url 'division-standings' bow='L' gender='W' age='14' %}">U14 Women</a>
-                        <a class="btn bg-teal-400 border-teal-700 text-teal-100" href="{% url 'division-standings' bow='L' gender='W' age='12' %}">U12 Women</a>
+                        <a class="btn bg-teal-400 border-teal-700 text-teal-100" href="{% season_url 'division-standings' season bow='L' gender='W' age='21' %}">U21 Women</a>
+                        <a class="btn bg-teal-400 border-teal-700 text-teal-100" href="{% season_url 'division-standings' season bow='L' gender='W' age='18' %}">U18 Women</a>
+                        <a class="btn bg-teal-400 border-teal-700 text-teal-100" href="{% season_url 'division-standings' season bow='L' gender='W' age='16' %}">U16 Women</a>
+                        <a class="btn bg-teal-400 border-teal-700 text-teal-100" href="{% season_url 'division-standings' season bow='L' gender='W' age='15' %}">U15 Women</a>
+                        <a class="btn bg-teal-400 border-teal-700 text-teal-100" href="{% season_url 'division-standings' season bow='L' gender='W' age='14' %}">U14 Women</a>
+                        <a class="btn bg-teal-400 border-teal-700 text-teal-100" href="{% season_url 'division-standings' season bow='L' gender='W' age='12' %}">U12 Women</a>
                     </div>
                     <div class="col-6">
-                        <a class="btn bg-green-400 border-green-700 text-green-100" href="{% url 'division-standings' bow='L' gender='M' age='21' %}">U21 Men</a>
-                        <a class="btn bg-green-400 border-green-700 text-green-100" href="{% url 'division-standings' bow='L' gender='M' age='18' %}">U18 Men</a>
-                        <a class="btn bg-green-400 border-green-700 text-green-100" href="{% url 'division-standings' bow='L' gender='M' age='16' %}">U16 Men</a>
-                        <a class="btn bg-green-400 border-green-700 text-green-100" href="{% url 'division-standings' bow='L' gender='M' age='15' %}">U15 Men</a>
-                        <a class="btn bg-green-400 border-green-700 text-green-100" href="{% url 'division-standings' bow='L' gender='M' age='14' %}">U14 Men</a>
-                        <a class="btn bg-green-400 border-green-700 text-green-100" href="{% url 'division-standings' bow='L' gender='M' age='12' %}">U12 Men</a>
+                        <a class="btn bg-green-400 border-green-700 text-green-100" href="{% season_url 'division-standings' season bow='L' gender='M' age='21' %}">U21 Men</a>
+                        <a class="btn bg-green-400 border-green-700 text-green-100" href="{% season_url 'division-standings' season bow='L' gender='M' age='18' %}">U18 Men</a>
+                        <a class="btn bg-green-400 border-green-700 text-green-100" href="{% season_url 'division-standings' season bow='L' gender='M' age='16' %}">U16 Men</a>
+                        <a class="btn bg-green-400 border-green-700 text-green-100" href="{% season_url 'division-standings' season bow='L' gender='M' age='15' %}">U15 Men</a>
+                        <a class="btn bg-green-400 border-green-700 text-green-100" href="{% season_url 'division-standings' season bow='L' gender='M' age='14' %}">U14 Men</a>
+                        <a class="btn bg-green-400 border-green-700 text-green-100" href="{% season_url 'division-standings' season bow='L' gender='M' age='12' %}">U12 Men</a>
                     </div>
                 </div>
             </div>
@@ -109,7 +111,7 @@
 
     <div class="row">
         <div class="col-3">
-            <a class="btn bg-blue-400 border-blue-700 text-blue-100" href="{% url 'final-standings' %}">Final standings</a>
+            <a class="btn bg-blue-400 border-blue-700 text-blue-100" href="{% season_url 'final-standings' season %}">Final standings</a>
         </div>
     </div>
 </div>
