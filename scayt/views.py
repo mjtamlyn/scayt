@@ -1,7 +1,8 @@
 import itertools
 
 from django.db.models import Count
-from django.views.generic import DetailView, ListView, TemplateView
+from django.views.generic import DetailView, ListView, RedirectView, TemplateView
+from django.urls import reverse
 from django.utils import timezone
 
 from archerydjango.fields import DbAges, DbBowstyles, DbGender
@@ -40,6 +41,11 @@ class SeasonMixin:
         context = super().get_context_data(**kwargs)
         context["current_season"] = Season.objects.first()
         return context
+
+
+class YearRedirect(RedirectView):
+    def get_redirect_url(self, *args, **kwargs):
+        return reverse("calendar", kwargs=self.kwargs)
 
 
 class Calendar(SeasonMixin, ListView):

@@ -5,6 +5,7 @@ from . import views
 
 urlpatterns = [
     path("", views.Root.as_view(), name="root"),
+    path("<int:year>/", views.YearRedirect.as_view(), name="calendar"),
     path("calendar/", views.Calendar.as_view(), name="calendar"),
     path("<int:year>/calendar/", views.Calendar.as_view(), name="calendar"),
     path(
