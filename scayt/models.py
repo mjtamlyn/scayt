@@ -27,6 +27,7 @@ ROUND_FAMILIES = [
     ("720", "720s"),
     ("720/H2H", "720s/H2H"),
     ("900", "900s"),
+    ("l-metric", "Long Metrics"),
     ("s-metric", "Short Metrics"),
     ("windsor", "St George/Albion/Windsors"),
     ("western", "Westerns"),
