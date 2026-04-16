@@ -31,6 +31,7 @@ ROUND_FAMILIES = [
     ("s-metric", "Short Metrics"),
     ("windsor", "St George/Albion/Windsors"),
     ("western", "Westerns"),
+    ("national", "Nationals"),
 ]
 
 AGE_GROUPS = [
