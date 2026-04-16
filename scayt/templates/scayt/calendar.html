@@ -61,5 +61,13 @@
             {% endfor %}
         </table>
     </div>
+    {% if season.is_current %}
+    <h4>Provisional events</h4>
+    <ul>
+        <li>Jolly Archers Western</li>
+        <li>Parkfield Junior Goldmine</li>
+        <li>Sussex Junior Championships</li>
+    </ul>
+    {% endif %}
 </div>
 {% endblock %}
