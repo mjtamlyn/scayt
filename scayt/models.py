@@ -208,6 +208,8 @@ class Result(models.Model):
         help_text="Only for Metric",
     )
     placing = models.PositiveIntegerField()
+    classification = models.CharField(max_length=3, blank=True, default='')
+    classification_2 = models.CharField(max_length=3, blank=True, default='')
 
     def __str__(self):
         return "{archer} at {event} - Placing {place}".format(
@@ -219,6 +221,10 @@ class Result(models.Model):
     def save(self, *args, **kwargs):
         if not self.age_group_competed:
             self.age_group_competed = self.archer_season.age_group
+        if not self.classification:
+            self.classification = self.get_classification()
+            if self.shot_round_2:
+                self.classification_2 = self.get_classification_2()
         super().save(*args, **kwargs)
 
     @property
@@ -265,8 +271,7 @@ class Result(models.Model):
             return 2
         return 1
 
-    @property
-    def classification(self):
+    def get_classification(self):
         score = self.score
         if self.shot_round_2:
             if not len(self.shot_round.passes) == 2:
@@ -283,8 +288,7 @@ class Result(models.Model):
         except ValueError:
             return "N/A"
 
-    @property
-    def classification_2(self):
+    def get_classification_2(self):
         if not self.shot_round_2:
             return None
         if not len(self.shot_round.passes) == 2:

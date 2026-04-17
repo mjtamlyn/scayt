@@ -8,6 +8,8 @@ register = template.Library()
 @register.filter
 def tag(classification):
     """Converts a classification into a tag"""
+    if not classification:
+        return ""
     colors = {
         "N/A": "bg-gray-600",
         "UC": "bg-gray-400",
