@@ -43,6 +43,11 @@ AGE_GROUPS = [
     ("U12", "U12"),
 ]
 
+POINTS_SYSTEMS = [
+    ("2023", "3/2/1 points as from 2023"),
+    ("2026", "4/3/2 + 1 points as from 2026"),
+]
+
 
 class Season(models.Model):
     year = models.PositiveIntegerField(
@@ -51,6 +56,7 @@ class Season(models.Model):
             validators.MaxValueValidator(2100),
         ]
     )
+    points_system = models.CharField(max_length=4, choices=POINTS_SYSTEMS)
 
     def __str__(self):
         return "%s season" % self.year
@@ -208,6 +214,7 @@ class Result(models.Model):
         help_text="Only for Metric",
     )
     placing = models.PositiveIntegerField()
+    out_of_division = models.BooleanField(default=False)
     classification = models.CharField(max_length=3, blank=True, default='')
     classification_2 = models.CharField(max_length=3, blank=True, default='')
 
@@ -257,19 +264,35 @@ class Result(models.Model):
 
     @property
     def scayt_points(self):
-        if self.event.is_final:
+        if self.archer_season.season.points_system == "2023":
+            if self.event.is_final:
+                if self.placing == 1:
+                    return 6
+                elif self.placing == 2:
+                    return 4
+                elif self.placing == 3:
+                    return 3
+                return 2
             if self.placing == 1:
-                return 6
-            elif self.placing == 2:
-                return 4
-            elif self.placing == 3:
                 return 3
-            return 2
-        if self.placing == 1:
-            return 3
-        elif self.placing == 2 or self.placing == 3:
-            return 2
-        return 1
+            elif self.placing == 2 or self.placing == 3:
+                return 2
+        elif self.archer_season.season.points_system == "2026":
+            if self.out_of_division:
+                return 1
+            if self.event.is_final:
+                if self.placing == 1:
+                    return 6
+                elif self.placing == 2:
+                    return 4
+                elif self.placing == 3:
+                    return 3
+                return 2
+            if self.placing == 1:
+                return 4
+            elif self.placing == 2 or self.placing == 3:
+                return 3
+        return 2
 
     def get_classification(self):
         score = self.score

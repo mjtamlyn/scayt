@@ -131,6 +131,7 @@ class FinalStandings(SeasonMixin, TemplateView):
                     archer__is_scas_member=True,
                 )
                 .prefetch_related("result_set")
+                .select_related("season")
             )
 
             placings = sorted(archers, key=lambda a: a.total_scayt_points, reverse=True)
@@ -181,7 +182,7 @@ class DivisionStandings(SeasonMixin, TemplateView):
             age_group=age,
             archer__gender=gender,
             bowstyle=bowstyle,
-        ).prefetch_related("result_set")
+        ).prefetch_related("result_set").select_related("season")
         context["placings"] = sorted(
             archers, key=lambda a: a.total_scayt_points, reverse=True
         )
