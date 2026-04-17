@@ -20,7 +20,6 @@ from archerydjango.utils import get_age_group
 
 from . import custom_rounds
 
-
 ROUND_FAMILIES = [
     ("bristol", "York/Hereford/Bristols"),
     ("metric", "1440s/Metrics"),
@@ -215,8 +214,8 @@ class Result(models.Model):
     )
     placing = models.PositiveIntegerField()
     out_of_division = models.BooleanField(default=False)
-    classification = models.CharField(max_length=3, blank=True, default='')
-    classification_2 = models.CharField(max_length=3, blank=True, default='')
+    classification = models.CharField(max_length=3, blank=True, default="")
+    classification_2 = models.CharField(max_length=3, blank=True, default="")
 
     def __str__(self):
         return "{archer} at {event} - Placing {place}".format(

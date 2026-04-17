@@ -6,13 +6,26 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('scayt', '0009_final_field'),
+        ("scayt", "0009_final_field"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='event',
-            name='round_family',
-            field=models.CharField(choices=[('bristol', 'York/Hereford/Bristols'), ('metric', '1440s/Metrics'), ('720', '720s'), ('720/H2H', '720s/H2H'), ('900', '900s'), ('l-metric', 'Long Metrics'), ('s-metric', 'Short Metrics'), ('windsor', 'St George/Albion/Windsors'), ('western', 'Westerns')], max_length=10),
+            model_name="event",
+            name="round_family",
+            field=models.CharField(
+                choices=[
+                    ("bristol", "York/Hereford/Bristols"),
+                    ("metric", "1440s/Metrics"),
+                    ("720", "720s"),
+                    ("720/H2H", "720s/H2H"),
+                    ("900", "900s"),
+                    ("l-metric", "Long Metrics"),
+                    ("s-metric", "Short Metrics"),
+                    ("windsor", "St George/Albion/Windsors"),
+                    ("western", "Westerns"),
+                ],
+                max_length=10,
+            ),
         ),
     ]

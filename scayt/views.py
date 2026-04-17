@@ -177,12 +177,16 @@ class DivisionStandings(SeasonMixin, TemplateView):
             age=age,
             gender=gender,
         )
-        archers = ArcherSeason.objects.filter(
-            season=season,
-            age_group=age,
-            archer__gender=gender,
-            bowstyle=bowstyle,
-        ).prefetch_related("result_set").select_related("season")
+        archers = (
+            ArcherSeason.objects.filter(
+                season=season,
+                age_group=age,
+                archer__gender=gender,
+                bowstyle=bowstyle,
+            )
+            .prefetch_related("result_set")
+            .select_related("season")
+        )
         context["placings"] = sorted(
             archers, key=lambda a: a.total_scayt_points, reverse=True
         )
