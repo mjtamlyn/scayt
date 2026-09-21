@@ -168,10 +168,10 @@ class DivisionStandings(SeasonMixin, TemplateView):
             "L": DbBowstyles.LONGBOW,
         }[self.kwargs["bow"]]
         gender = {
-            "M": DbGender.MALE,
             "W": DbGender.FEMALE,
+            "O": DbGender.OPEN,
         }[self.kwargs["gender"]]
-        age = DbAges["AGE_UNDER_%s" % self.kwargs["age"]]
+        age = DbAges["UNDER_%s" % self.kwargs["age"]]
         context["division"] = "{bow} {age} {gender}".format(
             bow=bowstyle,
             age=age,

@@ -22,12 +22,12 @@ urlpatterns = [
         name="final-standings",
     ),
     re_path(
-        r"^standings/(?P<bow>[RCBL])U(?P<age>\d+)(?P<gender>[MW])/$",
+        r"^standings/(?P<bow>[RCBL])U(?P<age>\d+)(?P<gender>[WO])/$",
         views.DivisionStandings.as_view(),
         name="division-standings",
     ),
     re_path(
-        r"^(?P<year>\d{4})/standings/(?P<bow>[RCBL])U(?P<age>\d+)(?P<gender>[MW])/$",
+        r"^(?P<year>\d{4})/standings/(?P<bow>[RCBL])U(?P<age>\d+)(?P<gender>[WO])/$",
         views.DivisionStandings.as_view(),
         name="division-standings",
     ),

@@ -13,6 +13,9 @@ from django_enumfield.enum import Enum as DbEnum
 from django_enumfield.db.fields import EnumField
 
 
+print(list(AGB_genders))
+
+
 class RoundField(models.CharField):
     description = "Choose from a set of archery rounds"
 
@@ -103,14 +106,14 @@ DbAges.__labels__ = {}
 for key, age_data in ages_data.items():
     DbAges.__labels__[DbAges[key]] = age_data["age_group"]
 DbAges.__lookup__ = {
-    "": DbAges.AGE_ADULT,
-    "50": DbAges.AGE_50_PLUS,
-    "U21": DbAges.AGE_UNDER_21,
-    "U18": DbAges.AGE_UNDER_18,
-    "U16": DbAges.AGE_UNDER_16,
-    "U15": DbAges.AGE_UNDER_15,
-    "U14": DbAges.AGE_UNDER_14,
-    "U12": DbAges.AGE_UNDER_12,
+    "": DbAges.ADULT,
+    "50": DbAges.OVER_50,
+    "U21": DbAges.UNDER_21,
+    "U18": DbAges.UNDER_18,
+    "U16": DbAges.UNDER_16,
+    "U15": DbAges.UNDER_15,
+    "U14": DbAges.UNDER_14,
+    "U12": DbAges.UNDER_12,
 }
 
 
@@ -124,12 +127,12 @@ DbGender = DbEnum(
     [(item.name, item.value) for item in AGB_genders],
 )
 DbGender.__labels__ = {
-    DbGender.MALE: "Men",
     DbGender.FEMALE: "Women",
+    DbGender.OPEN: "Open",
 }
 DbGender.__lookup__ = {
-    "M": DbGender.MALE,
     "W": DbGender.FEMALE,
+    "O": DbGender.OPEN,
 }
 
 

@@ -14,8 +14,8 @@ psycopg2 = "*"
 gunicorn = "*"
 whitenoise = "*"
 django-enumfield = "*"
-archeryutils = "2.0"
 django-object-actions = "*"
+archeryutils = "*"
 
 [dev-packages]
 

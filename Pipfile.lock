@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "74ba70906c6df3a6a133f92847c1c66f1009e8cfb905316bd1f3b4b43e0adcdc"
+            "sha256": "284fc1826ad714293caee43cefe38ef0c4ec4d3304341c24b05f12c9e66c14b3"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -27,12 +27,12 @@
         },
         "archeryutils": {
             "hashes": [
-                "sha256:1d3a55b1f21e7ea35df4abead854c7bc33387d7f4e038e620fbc4016cf48eb99",
-                "sha256:bc265b9095df6ee7471c24fd21d6505e4808592272c42841f90f5b9465c4f1a4"
+                "sha256:d4343cf21ad4b0e06cd844334813cab15d7af17c7b30f43640d4d84b86fe8495",
+                "sha256:e68f49dbb75b7d27b48ac76acd2630dfb6a88b29e2cb78717de6c6b661ffb440"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.10'",
-            "version": "==2.0.0"
+            "version": "==3.0.0"
         },
         "asgiref": {
             "hashes": [
