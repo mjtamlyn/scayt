@@ -57,16 +57,16 @@
                     </a>
                 </td>
 
-                {% if result.pass_1 %}
+                {% if result.pass_1 is not None %}
                     <td class="u-text-center">{{ result.pass_1 }}</td>
                 {% endif %}
-                {% if result.pass_2 %}
+                {% if result.pass_2 is not None %}
                     <td class="u-text-center">{{ result.pass_2 }}</td>
                 {% endif %}
-                {% if result.pass_3 %}
+                {% if result.pass_3 is not None %}
                     <td class="u-text-center">{{ result.pass_3 }}</td>
                 {% endif %}
-                {% if result.pass_4 %}
+                {% if result.pass_4 is not None %}
                     <td class="u-text-center">{{ result.pass_4 }}</td>
                 {% endif %}
 
