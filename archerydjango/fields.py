@@ -13,9 +13,6 @@ from django_enumfield.enum import Enum as DbEnum
 from django_enumfield.db.fields import EnumField
 
 
-print(list(AGB_genders))
-
-
 class RoundField(models.CharField):
     description = "Choose from a set of archery rounds"
 
