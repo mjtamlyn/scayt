@@ -40,7 +40,7 @@
                     {% with row.result as result %}
                     {{ result.round_name }} shot with a score of
                     {% if result.xs %}
-                    {{ result.score }}/{{ result.golds }}/{{ result.xs }}.
+                    {{ result.score }}/{{ result.xs }}/{{ result.golds }}.
                     {% else %}
                     {{ result.score }}/{{ result.hits }}/{{ result.golds }}.
                     {% endif %}

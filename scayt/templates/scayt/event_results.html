@@ -35,8 +35,8 @@
                         <th>Hits</th>
                         <th>Golds</th>
                     {% else %}
-                        <th>10+X</th>
                         <th>X</th>
+                        <th>10</th>
                     {% endif %}
 
                     <th><div style="white-space:normal; cursor: help; text-decoration: underline dotted" class="tooltip tooltip--bottom" data-tooltip="Archery GB Classification for the score achieved. Calculated for the athlete's actual age group, which may not match the competition.">Class.</a></th>
@@ -76,8 +76,8 @@
                     <td class="u-text-center">{{ result.hits }}</td>
                     <td class="u-text-center">{{ result.golds }}</td>
                 {% else %}
-                    <td class="u-text-center">{{ result.golds }}</td>
                     <td class="u-text-center">{{ result.xs }}</td>
+                    <td class="u-text-center">{{ result.golds }}</td>
                 {% endif %}
 
                 <td>{{ result.classification|tag }}{% if result.classification_2 %} / {{ result.classification_2|tag }}{% endif %}</td>
