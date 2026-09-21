@@ -16,6 +16,12 @@ from .forms import ImportConfirmForm, ImportUploadForm
 from .models import Archer, ArcherSeason, Event, Result, Season, Venue, rounds
 
 
+def int_if_not_none(arg):
+    if arg is None:
+        return None
+    return int(arg)
+
+
 @admin.register(Event)
 class EventAdmin(DjangoObjectActions, admin.ModelAdmin):
     list_display = ["name", "date", "round_family"]
@@ -246,14 +252,14 @@ class ImportResultsView(SingleObjectMixin, FormView):
                 age_group_competed=DbAges.__lookup__[row["Age Group"]],
                 shot_round=shot_round,
                 shot_round_2=shot_round_2,
-                score=int(row["Score"]),
-                golds=row.get("10", row.get("Golds")),
-                hits=row.get("Hits"),
-                xs=row.get("X"),
-                pass_1=row.get("1st Distance"),
-                pass_2=row.get("2nd Distance"),
-                pass_3=row.get("3rd Distance"),
-                pass_4=row.get("4th Distance"),
+                score=int_if_not_none(row["Score"]),
+                golds=int_if_not_none(row.get("10", row.get("Golds"))),
+                hits=int_if_not_none(row.get("Hits")),
+                xs=int_if_not_none(row.get("X")),
+                pass_1=int_if_not_none(row.get("1st Distance")),
+                pass_2=int_if_not_none(row.get("2nd Distance")),
+                pass_3=int_if_not_none(row.get("3rd Distance")),
+                pass_4=int_if_not_none(row.get("4th Distance")),
             )
             if not messages:
                 messages.append(
