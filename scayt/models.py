@@ -235,6 +235,11 @@ class Result(models.Model):
 
     @property
     def division(self):
+        if self.out_of_division:
+            return "Out of Division %s %s" % (
+                self.archer_season.bowstyle,
+                self.archer_season.archer.gender,
+            )
         return "%s %s %s" % (
             self.age_group_competed,
             self.archer_season.bowstyle,

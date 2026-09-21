@@ -250,6 +250,7 @@ class ImportResultsView(SingleObjectMixin, FormView):
                 event=event,
                 placing=row["Placing"],
                 age_group_competed=DbAges.__lookup__[row["Age Group"]],
+                out_of_division=bool(row.get("Out Of Division")),
                 shot_round=shot_round,
                 shot_round_2=shot_round_2,
                 score=int_if_not_none(row["Score"]),
