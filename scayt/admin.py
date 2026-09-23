@@ -299,6 +299,7 @@ class ImportResultsView(SingleObjectMixin, FormView):
             "Short Metric III": "short_metric_iii",
             "Short Metric IV": "short_metric_iv",
             "Short Metric V": "short_metric_v",
+            "900-70": "agb900_70",
             "WA900": "wa900",
             "900-50": "agb900_50",
             "900-40": "agb900_40",
