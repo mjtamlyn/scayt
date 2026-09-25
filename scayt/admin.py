@@ -316,6 +316,7 @@ class ImportResultsView(SingleObjectMixin, FormView):
             "Western 40": "western_40",
             "Western 30": "western_30",
             "Western 20": "western_20",
+            "St George": "st_george",
             "Albion": "albion",
             "Windsor": "windsor",
             "Windsor 50": "windsor_50",
