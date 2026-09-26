@@ -322,6 +322,12 @@ class ImportResultsView(SingleObjectMixin, FormView):
             "Windsor 50": "windsor_50",
             "Windsor 40": "windsor_40",
             "Windsor 30": "windsor_30",
+            "Long National": "long_national",
+            "National": "national",
+            "National 50": "national_50",
+            "National 40": "national_40",
+            "National 30": "national_30",
+            "National 20": "national_20",
         }.get(name)
         try:
             return rounds[round_ident or name]
