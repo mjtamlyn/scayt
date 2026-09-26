@@ -82,6 +82,7 @@ class EventResults(DetailView):
         context = super().get_context_data(**kwargs)
         context["results"] = self.object.result_set.order_by(
             "archer_season__bowstyle",
+            "out_of_division",
             "age_group_competed",
             "archer_season__archer__gender",
             "placing",

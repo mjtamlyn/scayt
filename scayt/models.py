@@ -286,12 +286,12 @@ class Result(models.Model):
                 return 1
             if self.event.is_final:
                 if self.placing == 1:
-                    return 6
+                    return 8
                 elif self.placing == 2:
-                    return 4
+                    return 6
                 elif self.placing == 3:
-                    return 3
-                return 2
+                    return 5
+                return 4
             if self.placing == 1:
                 return 4
             elif self.placing == 2 or self.placing == 3:
